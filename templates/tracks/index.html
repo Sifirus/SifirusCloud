@@ -1,0 +1,647 @@
+{% extends 'base.html' %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+    <div class="page">
+
+        <!-- Приветствие -->
+        <div class="greeting">
+            <div>
+                <h2>Привет, {{ user.username }}</h2>
+                <p>Что будем слушать сегодня?</p>
+            </div>
+            <a href="#" class="btn-upload">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 16 12 12 8 16"/>
+                    <line x1="12" y1="12" x2="12" y2="21"/>
+                    <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+                </svg>
+                Загрузить трек
+            </a>
+        </div>
+
+        <!-- Быстрый доступ -->
+        <div class="scroll-row">
+            <a href="#" class="quick-btn">
+                <div class="quick-icon" style="background:#eff6ff;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </div>
+                Каталог
+            </a>
+            <a href="#" class="quick-btn">
+                <div class="quick-icon" style="background:#f0fdf4;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="8" y1="6" x2="21" y2="6"/>
+                        <line x1="8" y1="12" x2="21" y2="12"/>
+                        <line x1="8" y1="18" x2="21" y2="18"/>
+                        <line x1="3" y1="6" x2="3.01" y2="6"/>
+                        <line x1="3" y1="12" x2="3.01" y2="12"/>
+                        <line x1="3" y1="18" x2="3.01" y2="18"/>
+                    </svg>
+                </div>
+                Плейлисты
+            </a>
+            <a href="#" class="quick-btn">
+                <div class="quick-icon" style="background:#fef2f2;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="none">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                Избранное
+            </a>
+            <a href="#" class="quick-btn">
+                <div class="quick-icon" style="background:#fefce8;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ca8a04" stroke-width="2.2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                История
+            </a>
+            <a href="#" class="quick-btn">
+                <div class="quick-icon" style="background:#faf5ff;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                        <polyline points="16 7 22 7 22 13"/>
+                    </svg>
+                </div>
+                Топ-чарт
+            </a>
+        </div>
+
+        <!-- Жанры -->
+        <div class="scroll-row" style="margin-bottom:28px;">
+            <span class="genre-chip active">Все</span>
+            <span class="genre-chip">Электроника</span>
+            <span class="genre-chip">Поп</span>
+            <span class="genre-chip">Рок</span>
+            <span class="genre-chip">Хип-хоп</span>
+            <span class="genre-chip">Джаз</span>
+            <span class="genre-chip">R&amp;B</span>
+            <span class="genre-chip">Классика</span>
+        </div>
+
+        <!-- Новые релизы -->
+        <div class="sec-head">
+            <h5 class="sec-title">
+      <span class="sec-icon" style="background:#fef2f2;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round"><polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </span>
+                Свежие новинки
+            </h5>
+            <a href="#" class="see-all">Все новинки
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="tracks-grid">
+            <div class="track-card">
+                <div class="t-cover" style="background:linear-gradient(135deg,#dbeafe,#ede9fe);">
+                    <div class="t-cover-art">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(99,102,241,.75)"
+                             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18V5l12-2v13"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="16" r="3"/>
+                        </svg>
+                    </div>
+                    <div class="play-overlay">
+                        <div class="play-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="t-name">Neon Dreams</div>
+                <div class="t-author">Electra</div>
+                <div class="t-footer">
+                    <div class="t-stats">
+                        <span class="t-stat"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                  stroke="currentColor" stroke-width="2"><path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>1.2k</span>
+                        <span class="t-stat"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                  stroke="currentColor" stroke-width="2"><polygon
+                                points="5 3 19 12 5 21 5 3"/></svg>4.2k</span>
+                    </div>
+                    <button class="like-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="track-card">
+                <div class="t-cover" style="background:linear-gradient(135deg,#cffafe,#a7f3d0);">
+                    <div class="t-cover-art">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(20,184,166,.75)"
+                             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                        </svg>
+                    </div>
+                    <div class="play-overlay">
+                        <div class="play-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="t-name">Midnight Waves</div>
+                <div class="t-author">Coastal</div>
+                <div class="t-footer">
+                    <div class="t-stats">
+                        <span class="t-stat"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                  stroke="currentColor" stroke-width="2"><path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>845</span>
+                        <span class="t-stat"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                  stroke="currentColor" stroke-width="2"><polygon
+                                points="5 3 19 12 5 21 5 3"/></svg>2.1k</span>
+                    </div>
+                    <button class="like-btn on">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444"
+                             stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="track-card">
+                <div class="t-cover" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">
+                    <div class="t-cover-art">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(202,138,4,.75)"
+                             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                    </div>
+                    <div class="play-overlay">
+                        <div class="play-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="t-name">velvet morning</div>
+                <div class="t-author">luna</div>
+                <div class="t-footer">
+                    <div class="t-stats">
+                        <span class="t-stat"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                  stroke="currentColor" stroke-width="2"><path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>3.0k</span>
+                        <span class="t-stat"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                  stroke="currentColor" stroke-width="2"><polygon
+                                points="5 3 19 12 5 21 5 3"/></svg>8.1k</span>
+                    </div>
+                    <button class="like-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="track-card">
+                <div class="t-cover" style="background:linear-gradient(135deg,#fce7f3,#ede9fe);">
+                    <div class="t-cover-art">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(139,92,246,.75)"
+                             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="play-overlay">
+                        <div class="play-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="t-name">Prism</div>
+                <div class="t-author">Kaleido</div>
+                <div class="t-footer">
+                    <div class="t-stats">
+                        <span class="t-stat"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                  stroke="currentColor" stroke-width="2"><path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>607</span>
+                        <span class="t-stat"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                  stroke="currentColor" stroke-width="2"><polygon
+                                points="5 3 19 12 5 21 5 3"/></svg>1.4k</span>
+                    </div>
+                    <button class="like-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Баннер каталога -->
+        <div class="cat-banner">
+            <div class="cat-inner">
+                <div>
+                    <div class="cat-eyebrow">Каталог треков</div>
+                    <div class="cat-title">Тысячи треков ждут вас</div>
+                    <div class="cat-sub">Фильтруйте по жанрам, исполнителям и настроению — находите музыку под любое
+                        состояние.
+                    </div>
+                </div>
+                <a href="#" class="btn-cat">
+                    Перейти в каталог
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Нижняя тройка -->
+        <div class="bottom-grid">
+
+            <!-- Чарт -->
+            <div>
+                <div class="sec-head">
+                    <h5 class="sec-title">
+                        <span class="sec-icon" style="background:#eff6ff;"><svg width="12" height="12"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="#3b82f6" stroke-width="2.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"><polyline
+                                points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+                        Популярное
+                    </h5>
+                    <a href="#" class="see-all">Весь чарт
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="card-box">
+                    <div class="chart-row">
+                        <div class="row-num-wrap"><span class="row-num">1</span><span class="row-play"><svg width="10"
+                                                                                                            height="10"
+                                                                                                            viewBox="0 0 24 24"
+                                                                                                            fill="#3b82f6"><polygon
+                                points="6 3 20 12 6 21 6 3"/></svg></span></div>
+                        <div class="mini-cover" style="background:#eff6ff;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3b82f6"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="row-info">
+                            <div class="row-title">Lose Control</div>
+                            <div class="row-author">Teddy Swims</div>
+                        </div>
+                        <span class="row-plays"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                     stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path
+                                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>12.1M</span>
+                    </div>
+                    <div class="chart-row">
+                        <div class="row-num-wrap"><span class="row-num">2</span><span class="row-play"><svg width="10"
+                                                                                                            height="10"
+                                                                                                            viewBox="0 0 24 24"
+                                                                                                            fill="#3b82f6"><polygon
+                                points="6 3 20 12 6 21 6 3"/></svg></span></div>
+                        <div class="mini-cover" style="background:#fce7f3;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ec4899"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="row-info">
+                            <div class="row-title">Flowers</div>
+                            <div class="row-author">Miley Cyrus</div>
+                        </div>
+                        <span class="row-plays"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                     stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path
+                                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>9.8M</span>
+                    </div>
+                    <div class="chart-row">
+                        <div class="row-num-wrap"><span class="row-num">3</span><span class="row-play"><svg width="10"
+                                                                                                            height="10"
+                                                                                                            viewBox="0 0 24 24"
+                                                                                                            fill="#3b82f6"><polygon
+                                points="6 3 20 12 6 21 6 3"/></svg></span></div>
+                        <div class="mini-cover" style="background:#fef3c7;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d97706"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="row-info">
+                            <div class="row-title">Cruel Summer</div>
+                            <div class="row-author">Taylor Swift</div>
+                        </div>
+                        <span class="row-plays"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                     stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path
+                                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>8.3M</span>
+                    </div>
+                    <div class="chart-row">
+                        <div class="row-num-wrap"><span class="row-num">4</span><span class="row-play"><svg width="10"
+                                                                                                            height="10"
+                                                                                                            viewBox="0 0 24 24"
+                                                                                                            fill="#3b82f6"><polygon
+                                points="6 3 20 12 6 21 6 3"/></svg></span></div>
+                        <div class="mini-cover" style="background:#ede9fe;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7c3aed"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="row-info">
+                            <div class="row-title">Blinding Lights</div>
+                            <div class="row-author">The Weeknd</div>
+                        </div>
+                        <span class="row-plays"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                     stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path
+                                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>7.1M</span>
+                    </div>
+                    <div class="chart-row">
+                        <div class="row-num-wrap"><span class="row-num">5</span><span class="row-play"><svg width="10"
+                                                                                                            height="10"
+                                                                                                            viewBox="0 0 24 24"
+                                                                                                            fill="#3b82f6"><polygon
+                                points="6 3 20 12 6 21 6 3"/></svg></span></div>
+                        <div class="mini-cover" style="background:#f0fdf4;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="row-info">
+                            <div class="row-title">Humble</div>
+                            <div class="row-author">Kendrick Lamar</div>
+                        </div>
+                        <span class="row-plays"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                     stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path
+                                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>6.4M</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Лента подписок -->
+            <div>
+                <div class="sec-head">
+                    <h5 class="sec-title">
+                        <span class="sec-icon" style="background:#f0fdf4;"><svg width="12" height="12"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="#22c55e" stroke-width="2.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"><path
+                                d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path
+                                d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                        Отслеживаемое
+                    </h5>
+                    <a href="#" class="see-all">Все
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="feed-list">
+                    <div class="feed-item">
+                        <div class="feed-ava" style="background:#eff6ff;">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3b82f6"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="feed-body">
+                            <div class="feed-txt"><b>Electra</b> опубликовала новый трек</div>
+                            <div class="feed-time">Neon Dreams · 3 ч. назад</div>
+                        </div>
+                        <button class="btn-sm-play">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="white">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                            Слушать
+                        </button>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-ava" style="background:#cffafe;">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891b2"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="8" y1="6" x2="21" y2="6"/>
+                                <line x1="8" y1="12" x2="21" y2="12"/>
+                                <line x1="8" y1="18" x2="21" y2="18"/>
+                                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                <line x1="3" y1="18" x2="3.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="feed-body">
+                            <div class="feed-txt"><b>Coastal</b> добавил трек в плейлист</div>
+                            <div class="feed-time">Midnight Waves · вчера</div>
+                        </div>
+                        <button class="btn-sm-play">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="white">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                            Слушать
+                        </button>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-ava" style="background:#fef3c7;">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d97706"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="feed-body">
+                            <div class="feed-txt"><b>luna</b> выпустила альбом</div>
+                            <div class="feed-time">velvet collection · 2 дня назад</div>
+                        </div>
+                        <button class="btn-sm-ghost">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2.5">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                            Слушать
+                        </button>
+                    </div>
+                    <a href="#" class="feed-add">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.5" stroke-linecap="round">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Найти авторов для подписки
+                    </a>
+                </div>
+            </div>
+
+            <!-- История -->
+            <div>
+                <div class="sec-head">
+                    <h5 class="sec-title">
+                        <span class="sec-icon" style="background:#fefce8;"><svg width="12" height="12"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="#ca8a04" stroke-width="2.5"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"><circle cx="12"
+                                                                                                                cy="12"
+                                                                                                                r="10"/><polyline
+                                points="12 6 12 12 16 14"/></svg></span>
+                        История
+                    </h5>
+                    <a href="#" class="see-all">Вся история
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hist-list">
+                    <div class="hist-row">
+                        <div class="hist-thumb" style="background:linear-gradient(135deg,#dbeafe,#ede9fe);">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6366f1"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="hist-body">
+                            <div class="hist-name">Neon Dreams</div>
+                            <div class="hist-meta">Electra · 3:24</div>
+                        </div>
+                        <div class="hist-time">2 ч. назад</div>
+                        <button class="hist-play">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="hist-row">
+                        <div class="hist-thumb" style="background:linear-gradient(135deg,#cffafe,#a7f3d0);">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0891b2"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="hist-body">
+                            <div class="hist-name">Midnight Waves</div>
+                            <div class="hist-meta">Coastal · 4:12</div>
+                        </div>
+                        <div class="hist-time">вчера</div>
+                        <button class="hist-play">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="hist-row">
+                        <div class="hist-thumb" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d97706"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="hist-body">
+                            <div class="hist-name">velvet morning</div>
+                            <div class="hist-meta">luna · 3:56</div>
+                        </div>
+                        <div class="hist-time">вчера</div>
+                        <button class="hist-play">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="hist-row">
+                        <div class="hist-thumb" style="background:linear-gradient(135deg,#fce7f3,#ede9fe);">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7c3aed"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="hist-body">
+                            <div class="hist-name">Prism</div>
+                            <div class="hist-meta">Kaleido · 2:48</div>
+                        </div>
+                        <div class="hist-time">2 дня назад</div>
+                        <button class="hist-play">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="hist-row">
+                        <div class="hist-thumb" style="background:linear-gradient(135deg,#ede9fe,#dbeafe);">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6366f1"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="hist-body">
+                            <div class="hist-name">Neon City Lights</div>
+                            <div class="hist-meta">SynthWave99 · 4:01</div>
+                        </div>
+                        <div class="hist-time">3 дня назад</div>
+                        <button class="hist-play">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}
