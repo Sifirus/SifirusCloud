@@ -98,11 +98,15 @@
             <!-- Профиль -->
             <div class="dd" id="ddUser">
                 <div class="user-ava" id="btnUser" role="button" aria-expanded="false" aria-label="Меню профиля">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
+                    {% if avatar %}
+                        <img src="/media/{{ avatar }}" style="object-fit: cover; width: 100%; height: 100%">
+                    {% else %}
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    {% endif %}
                 </div>
 
                 <div class="dd-panel user-panel" id="userPanel">

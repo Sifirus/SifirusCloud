@@ -1140,6 +1140,7 @@ label.lbl {
     cursor: pointer;
     flex-shrink: 0;
     transition: border-color .15s;
+    overflow: hidden;
 }
 
 .user-ava:hover {
