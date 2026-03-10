@@ -19,9 +19,10 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
-        labels = {
-            'full_name': 'Отображаемое имя',
-            'bio': 'О себе',
-            'location': 'Город',
-            'avatar': 'Аватар'
+        widgets = {
+            'avatar': forms.FileInput(attrs={
+                'accept': 'image/*',
+                'style': 'display: none;',
+                'id': 'ava-input',
+            }),
         }

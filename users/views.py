@@ -63,16 +63,16 @@ def render_profile(request, user_id):
 @login_required(login_url='login')
 def edit_profile(request, user_id):
     profile = Profile.objects.filter(user_id=user_id).first()
-    if request.user == profile.user:
-        if request.method == 'POST':
-            form = ProfileForm(request.POST, instance=profile)
-            if form.is_valid():
-                form.save()
-                return redirect('profile', user_id=user_id)
-            else:
-                return render(request, 'users/profile_edit_form.html', {'form': form})
+    if request.user != profile.user:
+        return redirect('profile', user_id=user_id)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile', user_id=user_id)
         else:
-            form = ProfileForm(instance=profile)
             return render(request, 'users/profile_edit_form.html', {'form': form})
     else:
-        return redirect('profile', user_id=user_id)
+        form = ProfileForm(instance=profile)
+        return render(request, 'users/profile_edit_form.html', {'form': form})
