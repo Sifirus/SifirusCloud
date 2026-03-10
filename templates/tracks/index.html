@@ -9,7 +9,7 @@
                 <h2>Привет, {{ user.username }}</h2>
                 <p>Что будем слушать сегодня?</p>
             </div>
-            <a href="#" class="btn-upload">
+            <a href="{% url 'track_upload' %}" class="btn-upload">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                      stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="16 16 12 12 8 16"/>

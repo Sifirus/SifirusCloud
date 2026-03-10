@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% block title %}Загрузить трек{% endblock %}
+{% block content %}
+
+    <form method="post" action="{% url 'track_upload' %}" class="page upload-page">
+        {% csrf_token %}
+        <h2 class="upload-title">Загрузить трек</h2>
+        <div class="upload-sub">MP3 или WAV, не более 100 МБ</div>
+        {% load widget_tweaks %}
+        <!-- Дропзона -->
+        <div class="dropzone" id="dropzone">
+            {% render_field form.audio_file type="file" id="track-input" accept=".mp3,.wav" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;" %}
+            <div class="dropzone-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 16 12 12 8 16"/>
+                    <line x1="12" y1="12" x2="12" y2="21"/>
+                    <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+                </svg>
+            </div>
+            <div class="dropzone-title" id="dz-title">Перетащите файл сюда</div>
+            <div class="dropzone-hint" id="dz-hint">или нажмите для выбора файла</div>
+            <button class="btn-p" style="font-size:.85rem;position:relative;z-index:1;"
+                    onclick="document.getElementById('track-input').click();event.stopPropagation();">Выбрать файл
+            </button>
+        </div>
+
+        <!-- Прогресс загрузки (скрыт до выбора файла) -->
+        <div class="card-box" style="padding:16px 20px;margin-bottom:24px;display:none;" id="upload-progress">
+            <div class="upload-file-row">
+                <div class="upload-file-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                </div>
+                <div style="flex:1;">
+                    <div class="upload-file-name" id="upload-filename">—</div>
+                    <div class="upload-file-meta" id="upload-meta">—</div>
+                </div>
+                <div class="upload-file-pct" id="upload-pct">0%</div>
+            </div>
+            <div class="prog-track">
+                <div class="prog-track-fill" id="upload-bar"></div>
+            </div>
+        </div>
+
+        <!-- Метаданные -->
+        <div class="card-box meta-card">
+            <div class="meta-title">Метаданные трека</div>
+            <div class="meta-top-row">
+
+                <!-- Обложка -->
+                <div class="cover-upload" id="cover-upload" onclick="document.getElementById('cover-input').click()">
+                    {% render_field form.cover_image type="file" id="cover-input" accept="image/*" style="display:none;" %}
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                    <div class="cover-upload-label">Обложка</div>
+                </div>
+
+                <div class="meta-fields">
+                    <div>
+                        <label class="lbl">Название трека *</label>
+                        {% render_field form.title class="inp" id="track-name" placeholder="Название трека" %}
+                    </div>
+                    <div>
+                        <label class="lbl">Описание</label>
+                        <textarea class="inp" rows="2" placeholder="Расскажите о треке..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="meta-grid">
+                <div>
+                    <label class="lbl">Жанр</label>
+                    {% render_field form.genre type="text" id="tag-input" class="inp inp-select" placeholder="Добавить тег..."%}
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="publish-row">
+            <button class="btn-p" type="submit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Опубликовать
+            </button>
+        </div>
+
+    </form>
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block extra_js %}
+    <script>
+        const dropzone = document.getElementById('dropzone');
+        const trackInput = document.getElementById('track-input');
+        const progress = document.getElementById('upload-progress');
+        const bar = document.getElementById('upload-bar');
+        const pct = document.getElementById('upload-pct');
+        const fname = document.getElementById('upload-filename');
+        const fmeta = document.getElementById('upload-meta');
+        const dzTitle = document.getElementById('dz-title');
+        const dzHint = document.getElementById('dz-hint');
+
+        // Drag events
+        dropzone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropzone.classList.add('over');
+        });
+
+        dropzone.addEventListener('dragleave', e => {
+            if (!dropzone.contains(e.relatedTarget)) dropzone.classList.remove('over');
+        });
+
+        dropzone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropzone.classList.remove('over');
+            const file = e.dataTransfer.files[0];
+            if (file) handleFile(file);
+        });
+
+        // Click через input
+        trackInput.addEventListener('change', function () {
+            if (this.files[0]) handleFile(this.files[0]);
+        });
+
+        function handleFile(file) {
+            const mb = (file.size / 1024 / 1024).toFixed(1);
+
+            // Обновляем дропзону
+            dzTitle.textContent = file.name;
+            dzHint.textContent = mb + ' МБ · MP3/WAV';
+
+            // Автозаполнение названия из имени файла
+            const nameInput = document.getElementById('track-name');
+            if (!nameInput.value) {
+                nameInput.value = file.name.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' ');
+            }
+
+            // Показываем прогресс и симулируем загрузку
+            fname.textContent = file.name;
+            fmeta.textContent = '0 МБ из ' + mb + ' МБ';
+            progress.style.display = 'block';
+            bar.style.width = '0%';
+            pct.textContent = '0%';
+
+            let val = 0;
+            const interval = setInterval(() => {
+                val += Math.random() * 8 + 2;
+                if (val >= 100) {
+                    val = 100;
+                    clearInterval(interval);
+                    pct.textContent = '✓';
+                } else {
+                    pct.textContent = Math.round(val) + '%';
+                }
+                bar.style.width = val + '%';
+                fmeta.textContent = (mb * val / 100).toFixed(1) + ' МБ из ' + mb + ' МБ';
+            }, 120);
+        }
+
+        // Обложка — превью
+        document.getElementById('cover-input').addEventListener('change', function () {
+            const file = this.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const wrap = document.getElementById('cover-upload');
+                wrap.innerHTML = `<img src="${e.target.result}"><input type="file" id="cover-input" accept="image/*" style="display:none;">`;
+                wrap.onclick = () => document.getElementById('cover-input').click();
+                document.getElementById('cover-input').addEventListener('change', arguments.callee.bind(this));
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Теги — добавление по Enter или запятой
+        document.getElementById('tag-input').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ',') {
+                e.preventDefault();
+                const val = this.value.trim().replace(',', '');
+                if (!val) return;
+                const chip = document.createElement('span');
+                chip.className = 'tag-chip';
+                chip.innerHTML = `${val} <button type="button">×</button>`;
+                chip.querySelector('button').onclick = () => chip.remove();
+                document.getElementById('tags-wrap').insertBefore(chip, this);
+                this.value = '';
+            }
+        });
+    </script>
+{% endblock %}
