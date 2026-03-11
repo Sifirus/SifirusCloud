@@ -1,16 +1,16 @@
 <div class="topbar" id="appTopbar">
     <div class="topbar-inner">
 
-        <a class="app-brand" href="{% url 'index' %}">SifirusCloud</a>
+        <a class="app-brand" href="{% url 'tracks:index' %}">SifirusCloud</a>
 
         <!-- Desktop nav -->
         <nav class="nav-links">
-            {% url 'index' as url %}
-            <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'index' %}">Главная</a>
+            {% url 'tracks:index' as url %}
+            <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:index' %}">Главная</a>
             <a class="nav-link " href="#">Каталог</a>
             <a class="nav-link " href="#">Библиотека</a>
             {% url 'track_upload' as url %}
-            <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'track_upload' %}">Загрузить</a>
+            <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:track_upload' %}">Загрузить</a>
         </nav>
 
         <div class="nav-right">
@@ -161,11 +161,11 @@
 
     <!-- Mobile drawer -->
     <div class="app-mobile-menu" id="appMobileMenu">
-        {% url 'index' as url %}
-        <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'index' %}">Главная</a>
+        {% url 'tracks:index' as url %}
+        <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:index' %}">Главная</a>
         <a class="nav-link" href="#">Каталог</a>
         <a class="nav-link" href="#">Библиотека</a>
         {% url 'track_upload' as url %}
-        <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'track_upload' %}">Загрузить</a>
+        <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:track_upload' %}">Загрузить</a>
     </div>
 </div>

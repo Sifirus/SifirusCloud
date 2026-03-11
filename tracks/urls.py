@@ -3,6 +3,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 from . import views
 
+
+app_name = 'tracks'
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('upload/', views.TrackCreateView.as_view(), name='track_upload'),

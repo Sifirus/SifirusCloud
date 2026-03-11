@@ -1,10 +1,301 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}{{ track.uploaded_by.username }} · {{ track.title }}{% endblock %}
+{% block content %}
 
-</body>
-</html>
+    <div class="page">
+
+        <div class="track-layout">
+
+            <!-- Основной контент -->
+            <div>
+
+                <!-- Обложка + инфо -->
+                <div class="track-info-row">
+
+                    <!-- Обложка -->
+                    <div class="track-cover">
+                        {% if track.cover_image %}
+                            <img src="{{ track.cover_image.url }}" alt="{{ track.title }}">
+                        {% else %}
+                            <div class="track-cover-placeholder">
+                                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(99,102,241,.5)"
+                                     stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 18V5l12-2v13"/>
+                                    <circle cx="6" cy="18" r="3"/>
+                                    <circle cx="18" cy="16" r="3"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Инфо -->
+                    <div style="flex:1;min-width:200px;">
+                        {% if track.genre %}
+                            <div class="track-genre">{{ track.get_genre_display }}</div>
+                        {% endif %}
+
+                        <h1 class="track-title">{{ track.title }}</h1>
+                        <a href="#" class="track-artist">{{ track.artist }}</a>
+
+                        <div class="track-stats-row">
+            <span class="track-stat">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path
+                      d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              {{ track.plays_count }} прослушиваний
+            </span>
+                        </div>
+
+                        <div class="track-date">
+                            Загружено {{ track.created_at|date:"d E Y" }}
+                        </div>
+
+                        <div class="track-actions">
+                            <button class="btn-p">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                                    <polygon points="6 3 20 12 6 21 6 3"/>
+                                </svg>
+                                Слушать
+                            </button>
+                            <button class="btn-o">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="18" cy="5" r="3"/>
+                                    <circle cx="6" cy="12" r="3"/>
+                                    <circle cx="18" cy="19" r="3"/>
+                                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                                </svg>
+                                Поделиться
+                            </button>
+                            {% if track.uploaded_by == request.user %}
+                                <a href="{% url 'tracks:track_edit' track.pk %}" class="btn-o">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                    Редактировать
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вейвформ -->
+                <div class="card-box" style="padding:16px 20px;margin-bottom:24px;">
+                    <div class="waveform" id="waveform">
+                        <!-- JS генерирует бары -->
+                    </div>
+                    <div class="waveform-times">
+                        <span>0:00</span>
+                        <span id="track-duration">—</span>
+                    </div>
+                    {% if track.audio_file %}
+                        <audio id="audio-player" src="{{ track.audio_file.url }}" preload="metadata"></audio>
+                    {% endif %}
+                </div>
+
+                <!-- О треке -->
+                {% if track.description %}
+                    <div class="card-box" style="padding:20px;margin-bottom:24px;">
+                        <div style="font-size:.9rem;font-weight:700;margin-bottom:10px;">О треке</div>
+                        <div class="track-desc">{{ track.description }}</div>
+                    </div>
+                {% endif %}
+
+                <!-- Комментарии -->
+                <div style="font-size:.95rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    Комментарии <span style="font-size:.8rem;font-weight:600;color:#94a3b8;">88</span>
+                </div>
+
+                <div style="display:flex;gap:12px;margin-bottom:16px;">
+                    <div class="comment-ava" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6);">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <div style="flex:1;">
+                        <textarea class="comment-input" rows="2" placeholder="Оставить комментарий..."></textarea>
+                        <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+                            <button class="btn-p sm">Отправить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-row">
+                    <div class="comment-ava" style="background:#eff6ff;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18V5l12-2v13"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="16" r="3"/>
+                        </svg>
+                    </div>
+                    <div style="flex:1;">
+                        <div style="font-size:.82rem;font-weight:700;margin-bottom:2px;">luna <span
+                                style="font-weight:400;color:#94a3b8;font-size:.76rem;">· 2 часа назад</span></div>
+                        <div style="font-size:.875rem;color:#475569;">Очень атмосферно! Слушаю уже третий раз подряд 🎧
+                        </div>
+                    </div>
+                    <button class="btn-o sm" style="border:none;color:#94a3b8;gap:4px;padding:4px 8px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        12
+                    </button>
+                </div>
+                <div class="comment-row">
+                    <div class="comment-ava" style="background:#cffafe;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18V5l12-2v13"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="16" r="3"/>
+                        </svg>
+                    </div>
+                    <div style="flex:1;">
+                        <div style="font-size:.82rem;font-weight:700;margin-bottom:2px;">Coastal <span
+                                style="font-weight:400;color:#94a3b8;font-size:.76rem;">· вчера</span></div>
+                        <div style="font-size:.875rem;color:#475569;">Отличная продакшн! Какой DAW использовал?</div>
+                    </div>
+                    <button class="btn-o sm" style="border:none;color:#94a3b8;gap:4px;padding:4px 8px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        5
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Сайдбар -->
+            <div style="display:flex;flex-direction:column;gap:16px;">
+
+                <!-- Автор -->
+                <div class="card-box" style="padding:20px;">
+                    <div class="sidebar-label">Автор</div>
+                    <div class="author-row">
+                        <div class="author-ava">
+                            {% if track.uploaded_by.profile.avatar %}
+                                <img src="{{ track.uploaded_by.profile.avatar.url }}"
+                                     style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+                            {% else %}
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white"
+                                     stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <div class="author-name">{{ track.uploaded_by.username }}</div>
+                            <div class="author-followers">{{ track.uploaded_by.tracks.count }} треков</div>
+                        </div>
+                    </div>
+                    <div class="author-btns">
+                        <a href="{% url 'profile' track.uploaded_by.id %}" class="btn-o sm">Профиль</a>
+                    </div>
+                </div>
+
+                <!-- Похожие треки -->
+                <div class="card-box" style="padding:16px;">
+                    <div class="sidebar-label">Похожие треки</div>
+                    <div class="chart-row">
+                        <div class="mini-cover" style="background:#cffafe;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0891b2"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="row-info">
+                            <div class="row-title">Midnight Waves</div>
+                            <div class="row-author">Coastal</div>
+                        </div>
+                        <button class="ctrl">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="#3b82f6">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="chart-row">
+                        <div class="mini-cover" style="background:#fef3c7;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="row-info">
+                            <div class="row-title">velvet morning</div>
+                            <div class="row-author">luna</div>
+                        </div>
+                        <button class="ctrl">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="#3b82f6">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="chart-row">
+                        <div class="mini-cover" style="background:#ede9fe;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="row-info">
+                            <div class="row-title">Prism</div>
+                            <div class="row-author">Kaleido</div>
+                        </div>
+                        <button class="ctrl">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="#3b82f6">
+                                <polygon points="6 3 20 12 6 21 6 3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block extra_js %}
+    <script>
+        // Генерация вейвформа
+        const wf = document.getElementById('waveform');
+        const heights = [35, 55, 42, 70, 48, 60, 80, 35, 90, 55, 45, 68, 38, 72, 50, 40, 85, 45, 62, 38, 72, 55, 42, 68, 50, 35, 78, 46, 63, 40];
+        const half = Math.floor(heights.length * 0.47);
+        heights.forEach((h, i) => {
+            const bar = document.createElement('div');
+            bar.className = 'w-bar ' + (i < half ? 'played' : 'rest');
+            bar.style.height = h + '%';
+            wf.appendChild(bar);
+        });
+
+        // Длительность аудио
+        const audio = document.getElementById('audio-player');
+        if (audio) {
+            audio.addEventListener('loadedmetadata', () => {
+                const m = Math.floor(audio.duration / 60);
+                const s = Math.floor(audio.duration % 60).toString().padStart(2, '0');
+                document.getElementById('track-duration').textContent = m + ':' + s;
+            });
+        }
+    </script>
+{% endblock %}
