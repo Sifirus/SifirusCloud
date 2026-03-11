@@ -8,7 +8,7 @@ from .models import *
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect(reverse('index'))
+        return redirect(reverse('tracks:index'))
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -28,7 +28,7 @@ def register(request):
 
 def login_user(request):
     if request.user.is_authenticated:
-        return redirect(reverse('index'))
+        return redirect(reverse('tracks:index'))
 
     if request.method == 'POST':
         form = LoginForm(request, request.POST)
@@ -36,7 +36,7 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect(reverse('index'))
+            return redirect(reverse('tracks:index'))
 
         else:
             return render(request, 'users/login_form.html', {'form': form})
@@ -49,7 +49,7 @@ def login_user(request):
 def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
-        return redirect(reverse('index'))
+        return redirect(reverse('tracks:index'))
     else:
         return redirect('login')
 

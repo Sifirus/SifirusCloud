@@ -10,8 +10,8 @@ from tracks.models import Track
 
 def index(request):
     if request.user.is_authenticated:
-        tracks = Track.objects.order_by('-created_at')
-        return render(request, 'tracks/index.html', {'tracks': tracks})
+        newest_tracks = Track.objects.order_by('-created_at')[:8]
+        return render(request, 'tracks/index.html', {'newest_tracks': newest_tracks})
     else:
         return render(request, 'users/guest.html')
 

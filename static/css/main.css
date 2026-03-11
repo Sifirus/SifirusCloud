@@ -126,10 +126,19 @@ button {
     margin-bottom: 2px;
 }
 
+.t-name:hover {
+    color: #3b82f6
+}
+
 .t-author {
     font-size: .75rem;
     color: #64748b;
     margin-bottom: 8px;
+}
+
+.t-author:hover {
+    color: #1e293b;
+    text-decoration: underline;
 }
 
 /* SECTION BASE */
@@ -2790,3 +2799,326 @@ label.lbl {
         justify-content: center;
     }
 }
+
+/* TRACK PAGE */
+
+/* Лейаут */
+.track-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 28px;
+    align-items: start;
+}
+
+/* Обложка трека */
+.track-cover {
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #dbeafe, #ede9fe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.track-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-cover-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Инфо о треке */
+.track-info-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.track-genre {
+    font-size: .76rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.track-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.track-artist {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #3b82f6;
+}
+
+.track-stats-row {
+    display: flex;
+    gap: 16px;
+    margin: 12px 0;
+    font-size: .82rem;
+    color: #94a3b8;
+    flex-wrap: wrap;
+}
+
+.track-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.track-date {
+    font-size: .8rem;
+    color: #64748b;
+}
+
+.track-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+/* Вейвформ */
+.waveform {
+    display: flex;
+    align-items: flex-end;
+    gap: 2.5px;
+    height: 52px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.w-bar {
+    width: 3px;
+    border-radius: 3px;
+    transition: .1s;
+}
+
+.w-bar.played { background: #3b82f6; }
+.w-bar.rest   { background: #e2e8f0; }
+.w-bar:hover  { opacity: .7; }
+
+.waveform-times {
+    display: flex;
+    justify-content: space-between;
+    font-size: .72rem;
+    color: #94a3b8;
+}
+
+/* О треке */
+.track-desc {
+    font-size: .875rem;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.track-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Комментарии */
+.comments-title {
+    font-size: .95rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comments-count {
+    font-size: .8rem;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.comment-form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.comment-input {
+    width: 100%;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: .875rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    resize: none;
+    transition: .15s;
+    color: #1e293b;
+}
+
+.comment-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, .1);
+}
+
+.comment-row {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.comment-ava {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment-author {
+    font-size: .82rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.comment-time {
+    font-weight: 400;
+    color: #94a3b8;
+    font-size: .76rem;
+}
+
+.comment-text {
+    font-size: .875rem;
+    color: #475569;
+}
+
+/* Сайдбар — автор */
+.sidebar-label {
+    font-size: .82rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.author-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.author-ava {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.author-name {
+    font-weight: 700;
+}
+
+.author-followers {
+    font-size: .76rem;
+    color: #94a3b8;
+}
+
+.author-btns {
+    display: flex;
+    gap: 8px;
+}
+
+/* Добавить в плейлист */
+.add-pl-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.add-pl-row:hover { background: #f8fafc; }
+
+.add-pl-check {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: .15s;
+}
+
+.add-pl-check.on {
+    background: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.add-pl-name {
+    flex: 1;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.add-pl-count {
+    font-size: .72rem;
+    color: #94a3b8;
+}
+
+/* Адаптив */
+@media (max-width: 860px) {
+    .track-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .track-cover {
+        width: 160px;
+        height: 160px;
+    }
+
+    .track-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .track-info-row {
+        flex-direction: column;
+    }
+
+    .track-cover {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+
+
+
+

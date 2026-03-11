@@ -4,4 +4,4 @@ from .models import Track
 class TrackForm(forms.ModelForm):
     class Meta:
         model = Track
-        fields = ['title', 'description', 'genre', 'audio_file', 'cover_image']
+        fields = ['title','artist', 'description', 'genre', 'audio_file', 'cover_image']

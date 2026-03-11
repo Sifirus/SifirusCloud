@@ -2,7 +2,7 @@
 {% block title %}Загрузить трек{% endblock %}
 {% block content %}
 
-    <form method="post" action="{% url 'track_upload' %}" class="page upload-page">
+    <form method="post" action="{% url 'tracks:track_upload' %}" class="page upload-page" enctype="multipart/form-data">
         {% csrf_token %}
         <h2 class="upload-title">Загрузить трек</h2>
         <div class="upload-sub">MP3 или WAV, не более 100 МБ</div>
@@ -55,12 +55,16 @@
                 <!-- Обложка -->
                 <div class="cover-upload" id="cover-upload" onclick="document.getElementById('cover-input').click()">
                     {% render_field form.cover_image type="file" id="cover-input" accept="image/*" style="display:none;" %}
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                        <circle cx="12" cy="13" r="4"/>
-                    </svg>
-                    <div class="cover-upload-label">Обложка</div>
+                    <img id="cover-preview" src=""
+                         style="display:none;width:100%;height:100%;object-fit:cover;border-radius:8px;">
+                    <div id="cover-placeholder" class="text-center">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                            <circle cx="12" cy="13" r="4"/>
+                        </svg>
+                        <div class="cover-upload-label">Обложка</div>
+                    </div>
                 </div>
 
                 <div class="meta-fields">
@@ -70,7 +74,7 @@
                     </div>
                     <div>
                         <label class="lbl">Описание</label>
-                        <textarea class="inp" rows="2" placeholder="Расскажите о треке..."></textarea>
+                        {% render_field form.description class="inp" rows="2" placeholder="Расскажите о треке..." %}
                     </div>
                 </div>
             </div>
@@ -78,7 +82,11 @@
             <div class="meta-grid">
                 <div>
                     <label class="lbl">Жанр</label>
-                    {% render_field form.genre type="text" id="tag-input" class="inp inp-select" placeholder="Добавить тег..."%}
+                    {% render_field form.genre type="text" id="tag-input" class="inp inp-select" placeholder="Добавить тег..." %}
+                </div>
+                <div>
+                    <label class="lbl">Автор</label>
+                    {% render_field form.artist class="inp" id="track-artist" placeholder="Автор" value=user.username %}
                 </div>
             </div>
         </div>
@@ -172,27 +180,13 @@
             if (!file) return;
             const reader = new FileReader();
             reader.onload = e => {
-                const wrap = document.getElementById('cover-upload');
-                wrap.innerHTML = `<img src="${e.target.result}"><input type="file" id="cover-input" accept="image/*" style="display:none;">`;
-                wrap.onclick = () => document.getElementById('cover-input').click();
-                document.getElementById('cover-input').addEventListener('change', arguments.callee.bind(this));
+                const preview = document.getElementById('cover-preview');
+                const placeholder = document.getElementById('cover-placeholder');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                placeholder.style.display = 'none';
             };
             reader.readAsDataURL(file);
-        });
-
-        // Теги — добавление по Enter или запятой
-        document.getElementById('tag-input').addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ',') {
-                e.preventDefault();
-                const val = this.value.trim().replace(',', '');
-                if (!val) return;
-                const chip = document.createElement('span');
-                chip.className = 'tag-chip';
-                chip.innerHTML = `${val} <button type="button">×</button>`;
-                chip.querySelector('button').onclick = () => chip.remove();
-                document.getElementById('tags-wrap').insertBefore(chip, this);
-                this.value = '';
-            }
         });
     </script>
 {% endblock %}
