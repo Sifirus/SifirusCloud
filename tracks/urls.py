@@ -8,6 +8,7 @@ app_name = 'tracks'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('library/', views.library, name='library'),
     path('upload/', views.TrackCreateView.as_view(), name='track_upload'),
     path('track/<int:pk>', views.TrackDetailView.as_view(), name='track_detail'),
     path('track/<int:pk>/update/', views.TrackUpdateView.as_view(), name='track_update'),
