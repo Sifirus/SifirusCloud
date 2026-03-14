@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
 {% block title %}{{ track.uploaded_by.username }} · {{ track.title }}{% endblock %}
 {% block content %}
 
@@ -6,7 +7,7 @@
 
         <div class="track-layout">
 
-            <!-- Основной контент -->
+            <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
             <div>
 
                 <!-- Обложка + инфо -->
@@ -18,6 +19,7 @@
                             <img src="{{ track.cover_image.url }}" alt="{{ track.title }}">
                         {% else %}
                             <div class="track-cover-placeholder">
+                                <!-- Заглушка обложки -->
                                 <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(99,102,241,.5)"
                                      stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M9 18V5l12-2v13"/>
@@ -32,34 +34,65 @@
                     <div style="flex:1;min-width:200px;">
                         {% if track.genre %}
                             <div class="track-genre">{{ track.get_genre_display }}</div>
+                        {% else %}
+                            <div class="track-genre">ЭЛЕКТРОНИКА · LO-FI</div>
                         {% endif %}
 
                         <h1 class="track-title">{{ track.title }}</h1>
-                        <a href="#" class="track-artist">{{ track.artist }}</a>
+                        <a href="{% url 'profile' track.uploaded_by.id %}" class="track-artist">{{ track.artist }}</a>
 
                         <div class="track-stats-row">
-            <span class="track-stat">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path
-                      d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-              {{ track.plays_count }} прослушиваний
-            </span>
+                            <span class="track-stat">
+                                <!-- Иконка наушники -->
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                                    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                                </svg>
+                                {{ track.plays_count|humanize_number }} прослушиваний
+                            </span>
+                            <span class="track-stat">
+                                <!-- Иконка сердце -->
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                                1.2k лайков
+                            </span>
+                            <span class="track-stat">
+                                <!-- Иконка комментарий -->
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                88 комментариев
+                            </span>
                         </div>
 
                         <div class="track-date">
-                            Загружено {{ track.created_at|date:"d E Y" }}
+                            Загружено {{ track.created_at|date:"d E Y" }} · 3:24
                         </div>
 
                         <div class="track-actions">
                             <button class="btn-p">
+                                <!-- Иконка play -->
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
                                     <polygon points="6 3 20 12 6 21 6 3"/>
                                 </svg>
                                 Слушать
                             </button>
+                            <button class="btn-o" style="color:#ef4444;border-color:#fecaca;">
+                                <!-- Иконка лайк -->
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                                Лайк · 1.2k
+                            </button>
                             <button class="btn-o">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <!-- Иконка поделиться -->
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="18" cy="5" r="3"/>
                                     <circle cx="6" cy="12" r="3"/>
                                     <circle cx="18" cy="19" r="3"/>
@@ -68,10 +101,24 @@
                                 </svg>
                                 Поделиться
                             </button>
+                            <button class="btn-o">
+                                <!-- Иконка плейлист -->
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="8" y1="6" x2="21" y2="6"/>
+                                    <line x1="8" y1="12" x2="21" y2="12"/>
+                                    <line x1="8" y1="18" x2="21" y2="18"/>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                                </svg>
+                                В плейлист
+                            </button>
                             {% if track.uploaded_by == request.user %}
                                 <a href="{% url 'tracks:track_edit' track.pk %}" class="btn-o">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <!-- Иконка редактирования -->
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                                     </svg>
@@ -88,8 +135,8 @@
                         <!-- JS генерирует бары -->
                     </div>
                     <div class="waveform-times">
-                        <span>0:00</span>
-                        <span id="track-duration">—</span>
+                        <span>1:32</span>
+                        <span id="track-duration">3:24</span>
                     </div>
                     {% if track.audio_file %}
                         <audio id="audio-player" src="{{ track.audio_file.url }}" preload="metadata"></audio>
@@ -97,24 +144,34 @@
                 </div>
 
                 <!-- О треке -->
-                {% if track.description %}
-                    <div class="card-box" style="padding:20px;margin-bottom:24px;">
-                        <div style="font-size:.9rem;font-weight:700;margin-bottom:10px;">О треке</div>
+                <div class="card-box" style="padding:20px;margin-bottom:24px;">
+                    <div style="font-size:.9rem;font-weight:700;margin-bottom:10px;">О треке</div>
+                    {% if track.description %}
                         <div class="track-desc">{{ track.description }}</div>
+                    {% else %}
+                        <div class="track-desc">{{ track.title }} — это атмосферный lo-fi трек, вдохновлённый ночными городскими пейзажами.</div>
+                    {% endif %}
+                    <div class="track-tags">
+                        <span class="chip chip-blue">lo-fi</span>
+                        <span class="chip chip-blue">электроника</span>
+                        <span class="chip chip-gray">ночь</span>
+                        <span class="chip chip-gray">атмосфера</span>
                     </div>
-                {% endif %}
+                </div>
 
                 <!-- Комментарии -->
-                <div style="font-size:.95rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+                <div class="comments-title">
+                    <!-- Иконка комментарий -->
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                     </svg>
-                    Комментарии <span style="font-size:.8rem;font-weight:600;color:#94a3b8;">88</span>
+                    Комментарии <span class="comments-count">88</span>
                 </div>
 
-                <div style="display:flex;gap:12px;margin-bottom:16px;">
+                <div class="comment-form-row">
                     <div class="comment-ava" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6);">
+                        <!-- Заглушка аватара -->
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"
                              stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -129,8 +186,10 @@
                     </div>
                 </div>
 
+                <!-- Комментарий 1 -->
                 <div class="comment-row">
                     <div class="comment-ava" style="background:#eff6ff;">
+                        <!-- Заглушка аватара -->
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"
                              stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 18V5l12-2v13"/>
@@ -139,21 +198,23 @@
                         </svg>
                     </div>
                     <div style="flex:1;">
-                        <div style="font-size:.82rem;font-weight:700;margin-bottom:2px;">luna <span
-                                style="font-weight:400;color:#94a3b8;font-size:.76rem;">· 2 часа назад</span></div>
-                        <div style="font-size:.875rem;color:#475569;">Очень атмосферно! Слушаю уже третий раз подряд 🎧
-                        </div>
+                        <div class="comment-author">luna <span class="comment-time">· 2 часа назад</span></div>
+                        <div class="comment-text">Очень атмосферно! Слушаю уже третий раз подряд</div>
                     </div>
                     <button class="btn-o sm" style="border:none;color:#94a3b8;gap:4px;padding:4px 8px;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Иконка сердце -->
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                         </svg>
                         12
                     </button>
                 </div>
+
+                <!-- Комментарий 2 -->
                 <div class="comment-row">
                     <div class="comment-ava" style="background:#cffafe;">
+                        <!-- Заглушка аватара -->
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2"
                              stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 18V5l12-2v13"/>
@@ -162,13 +223,13 @@
                         </svg>
                     </div>
                     <div style="flex:1;">
-                        <div style="font-size:.82rem;font-weight:700;margin-bottom:2px;">Coastal <span
-                                style="font-weight:400;color:#94a3b8;font-size:.76rem;">· вчера</span></div>
-                        <div style="font-size:.875rem;color:#475569;">Отличная продакшн! Какой DAW использовал?</div>
+                        <div class="comment-author">Coastal <span class="comment-time">· вчера</span></div>
+                        <div class="comment-text">Отличная продакшн! Какой DAW использовал?</div>
                     </div>
                     <button class="btn-o sm" style="border:none;color:#94a3b8;gap:4px;padding:4px 8px;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Иконка сердце -->
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                         </svg>
                         5
@@ -177,7 +238,7 @@
 
             </div>
 
-            <!-- Сайдбар -->
+            <!-- ===== САЙДБАР ===== -->
             <div style="display:flex;flex-direction:column;gap:16px;">
 
                 <!-- Автор -->
@@ -189,6 +250,7 @@
                                 <img src="{{ track.uploaded_by.profile.avatar.url }}"
                                      style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
                             {% else %}
+                                <!-- Заглушка аватара -->
                                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white"
                                      stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -198,12 +260,48 @@
                         </div>
                         <div>
                             <div class="author-name">{{ track.uploaded_by.username }}</div>
-                            <div class="author-followers">{{ track.uploaded_by.tracks.count }} треков</div>
+                            <div class="author-followers">2.1k подписчиков</div>
                         </div>
                     </div>
                     <div class="author-btns">
+                        <button class="btn-p sm" style="flex:1;justify-content:center;">Подписаться</button>
                         <a href="{% url 'profile' track.uploaded_by.id %}" class="btn-o sm">Профиль</a>
                     </div>
+                </div>
+
+                <!-- Добавить в плейлист -->
+                <div class="card-box" style="padding:20px;">
+                    <div class="sidebar-label">Добавить в плейлист</div>
+                    <div class="add-pl-row">
+                        <div class="add-pl-check on">
+                            <!-- Иконка галочки -->
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div class="add-pl-name">Избранное</div>
+                        <div class="add-pl-count">12 тр.</div>
+                    </div>
+                    <div class="add-pl-row">
+                        <div class="add-pl-check"></div>
+                        <div class="add-pl-name">Для бега</div>
+                        <div class="add-pl-count">8 тр.</div>
+                    </div>
+                    <div class="add-pl-row">
+                        <div class="add-pl-check"></div>
+                        <div class="add-pl-name">Вечерний</div>
+                        <div class="add-pl-count">5 тр.</div>
+                    </div>
+                    <button class="btn-o sm" style="width:100%;justify-content:center;margin-top:10px;gap:6px;">
+                        <!-- Иконка плюс -->
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                             stroke-linecap="round">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Новый плейлист
+                    </button>
                 </div>
 
                 <!-- Похожие треки -->
@@ -211,8 +309,9 @@
                     <div class="sidebar-label">Похожие треки</div>
                     <div class="chart-row">
                         <div class="mini-cover" style="background:#cffafe;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0891b2"
-                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <!-- Заглушка обложки -->
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 18V5l12-2v13"/>
                                 <circle cx="6" cy="18" r="3"/>
                                 <circle cx="18" cy="16" r="3"/>
@@ -223,6 +322,7 @@
                             <div class="row-author">Coastal</div>
                         </div>
                         <button class="ctrl">
+                            <!-- Иконка play -->
                             <svg width="10" height="10" viewBox="0 0 24 24" fill="#3b82f6">
                                 <polygon points="6 3 20 12 6 21 6 3"/>
                             </svg>
@@ -230,8 +330,9 @@
                     </div>
                     <div class="chart-row">
                         <div class="mini-cover" style="background:#fef3c7;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706"
-                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <!-- Заглушка обложки -->
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 18V5l12-2v13"/>
                                 <circle cx="6" cy="18" r="3"/>
                                 <circle cx="18" cy="16" r="3"/>
@@ -249,8 +350,9 @@
                     </div>
                     <div class="chart-row">
                         <div class="mini-cover" style="background:#ede9fe;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed"
-                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <!-- Заглушка обложки -->
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 18V5l12-2v13"/>
                                 <circle cx="6" cy="18" r="3"/>
                                 <circle cx="18" cy="16" r="3"/>
@@ -272,14 +374,13 @@
         </div>
     </div>
 
-
 {% endblock %}
 {% block footer %}{% endblock %}
 {% block extra_js %}
     <script>
         // Генерация вейвформа
         const wf = document.getElementById('waveform');
-        const heights = [35, 55, 42, 70, 48, 60, 80, 35, 90, 55, 45, 68, 38, 72, 50, 40, 85, 45, 62, 38, 72, 55, 42, 68, 50, 35, 78, 46, 63, 40];
+        const heights = [35,55,42,70,48,60,80,35,90,55,45,68,38,72,50,40,85,45,62,38,72,55,42,68,50,35,78,46,63,40,55,70,42,85,48,62,35,75,50,68,38,90,55,42,70,35,80,45,65,40,72,55,38,85,48,62,42,78,50,35,68,55,90,42,70,48,60,35,82,45,65,38,75,55,42,85,50,68,40,72];
         const half = Math.floor(heights.length * 0.47);
         heights.forEach((h, i) => {
             const bar = document.createElement('div');
@@ -297,5 +398,17 @@
                 document.getElementById('track-duration').textContent = m + ':' + s;
             });
         }
+
+        // Клик по чекбоксу плейлиста
+        document.querySelectorAll('.add-pl-check').forEach(el => {
+            el.addEventListener('click', function () {
+                this.classList.toggle('on');
+                if (this.classList.contains('on')) {
+                    this.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+                } else {
+                    this.innerHTML = '';
+                }
+            });
+        });
     </script>
 {% endblock %}
