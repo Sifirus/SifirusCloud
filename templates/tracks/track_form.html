@@ -11,6 +11,7 @@
         <div class="dropzone" id="dropzone">
             {% render_field form.audio_file type="file" id="track-input" accept=".mp3,.wav" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;" %}
             <div class="dropzone-icon">
+                <!-- Иконка загрузки -->
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"
                      stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="16 16 12 12 8 16"/>
@@ -20,8 +21,8 @@
             </div>
             <div class="dropzone-title" id="dz-title">Перетащите файл сюда</div>
             <div class="dropzone-hint" id="dz-hint">или нажмите для выбора файла</div>
-            <button class="btn-p" style="font-size:.85rem;position:relative;z-index:1;"
-                    onclick="document.getElementById('track-input').click();event.stopPropagation();">Выбрать файл
+            <button type="button" class="btn-p" style="font-size:.85rem;position:relative;z-index:1;"
+                    onclick="document.getElementById('track-input').click();">Выбрать файл
             </button>
         </div>
 
@@ -29,6 +30,7 @@
         <div class="card-box" style="padding:16px 20px;margin-bottom:24px;display:none;" id="upload-progress">
             <div class="upload-file-row">
                 <div class="upload-file-icon">
+                    <!-- Иконка ноты -->
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round">
                         <path d="M9 18V5l12-2v13"/>
@@ -58,6 +60,7 @@
                     <img id="cover-preview" src=""
                          style="display:none;width:100%;height:100%;object-fit:cover;border-radius:8px;">
                     <div id="cover-placeholder" class="text-center">
+                        <!-- Иконка камеры -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"
                              stroke-linecap="round" stroke-linejoin="round">
                             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
@@ -82,23 +85,65 @@
             <div class="meta-grid">
                 <div>
                     <label class="lbl">Жанр</label>
-                    {% render_field form.genre type="text" id="tag-input" class="inp inp-select" placeholder="Добавить тег..." %}
+                    <select name="genre" class="inp inp-select">
+                        <option value="">Выберите жанр</option>
+                        <option value="electronic">Электроника</option>
+                        <option value="pop">Поп</option>
+                        <option value="rock">Рок</option>
+                        <option value="hiphop">Хип-хоп</option>
+                        <option value="jazz">Джаз</option>
+                        <option value="rnb">R&B</option>
+                        <option value="classical">Классика</option>
+                        <option value="lofi">Lo-fi</option>
+                    </select>
                 </div>
                 <div>
-                    <label class="lbl">Автор</label>
-                    {% render_field form.artist class="inp" id="track-artist" placeholder="Автор" value=user.username %}
+                    <label class="lbl">Видимость</label>
+                    <select name="visibility" class="inp inp-select">
+                        <option value="public">Публичный</option>
+                        <option value="link">Только по ссылке</option>
+                        <option value="private">Приватный</option>
+                    </select>
                 </div>
             </div>
+
+            <!-- Теги -->
+            <div style="margin-bottom:14px;">
+                <label class="lbl">Теги</label>
+                <div class="tags-input" id="tags-input" onclick="document.getElementById('tag-input').focus()">
+                    <span class="tag-chip">lo-fi <button type="button" onclick="this.parentElement.remove()">×</button></span>
+                    <span class="tag-chip">электроника <button type="button" onclick="this.parentElement.remove()">×</button></span>
+                    <input type="text" id="tag-input" placeholder="Добавить тег...">
+                </div>
+            </div>
+
+            <!-- Контент 18+ -->
+            <label class="check-label">
+                <input type="checkbox" name="is_explicit"> Контент 18+
+            </label>
+
+            <!-- Скрытое поле автора -->
+            {% render_field form.artist type="hidden" value=user.username %}
         </div>
 
         <!-- Кнопки -->
         <div class="publish-row">
             <button class="btn-p" type="submit">
+                <!-- Иконка галочки -->
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                      stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"/>
                 </svg>
                 Опубликовать
+            </button>
+            <button class="btn-o" type="button">
+                <!-- Иконка редактирования -->
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                Черновик
             </button>
         </div>
 
@@ -187,6 +232,27 @@
                 placeholder.style.display = 'none';
             };
             reader.readAsDataURL(file);
+        });
+
+        // Теги — добавление по Enter
+        document.getElementById('tag-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ',') {
+                e.preventDefault();
+                const val = this.value.trim().replace(/,/g, '');
+                if (!val) return;
+
+                const chip = document.createElement('span');
+                chip.className = 'tag-chip';
+                chip.textContent = val + ' ';
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = '×';
+                btn.onclick = function() { chip.remove(); };
+                chip.appendChild(btn);
+
+                this.parentElement.insertBefore(chip, this);
+                this.value = '';
+            }
         });
     </script>
 {% endblock %}

@@ -20,7 +20,6 @@ def index(request):
 @login_required(login_url='login')
 def library(request):
     """Страница «Моя библиотека»."""
-    # Показываем все треки пользователя как заглушку, пока нет лайков
     liked_tracks = Track.objects.order_by('-created_at')[:5]
     my_tracks_count = Track.objects.filter(uploaded_by=request.user).count()
 
