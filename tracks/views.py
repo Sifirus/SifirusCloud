@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
@@ -15,6 +16,17 @@ def index(request):
     else:
         return render(request, 'users/guest.html')
 
+
+@login_required(login_url='login')
+def library(request):
+    """Страница «Моя библиотека»."""
+    liked_tracks = Track.objects.order_by('-created_at')[:5]
+    my_tracks_count = Track.objects.filter(uploaded_by=request.user).count()
+
+    return render(request, 'tracks/library.html', {
+        'liked_tracks': liked_tracks,
+        'my_tracks_count': my_tracks_count,
+    })
 
 class TrackCreateView(LoginRequiredMixin, CreateView):
     model = Track

@@ -8,7 +8,8 @@
             {% url 'tracks:index' as url %}
             <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:index' %}">Главная</a>
             <a class="nav-link " href="#">Каталог</a>
-            <a class="nav-link " href="#">Библиотека</a>
+            {% url 'tracks:library' as lib_url %}
+            <a class="nav-link {% if request.path == lib_url %}active{% endif %}" href="{% url 'tracks:library' %}">Библиотека</a>
             {% url 'track_upload' as url %}
             <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:track_upload' %}">Загрузить</a>
         </nav>
