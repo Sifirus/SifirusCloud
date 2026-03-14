@@ -3118,9 +3118,7 @@ label.lbl {
     }
 }
 
-
 /* Library */
-/* Заголовок страницы */
 .lib-header {
     display: flex;
     align-items: center;
@@ -3139,7 +3137,6 @@ label.lbl {
     color: #64748b;
 }
 
-/* 2-колоночная сетка */
 .lib-grid {
     display: grid;
     grid-template-columns: 220px 1fr;
@@ -3150,7 +3147,6 @@ label.lbl {
     .lib-grid { grid-template-columns: 1fr; }
 }
 
-/* Сайдбар */
 .lib-sidebar-nav {
     background: #fff;
     border: 1.5px solid #e8edf3;
@@ -3199,12 +3195,10 @@ label.lbl {
     margin: 6px 0;
 }
 
-/* Контент */
 .lib-content {
     min-width: 0;
 }
 
-/* Сортировка */
 .lib-sort-wrap {
     display: flex;
     align-items: center;
@@ -3228,7 +3222,6 @@ label.lbl {
     border-color: #3b82f6;
 }
 
-/* Строка трека в списке лайков */
 .lib-track-row {
     display: flex;
     align-items: center;
@@ -3279,7 +3272,6 @@ label.lbl {
     color: #475569;
 }
 
-/* Пустое состояние */
 .lib-empty-state {
     display: flex;
     flex-direction: column;
@@ -3294,7 +3286,6 @@ label.lbl {
     color: #94a3b8;
 }
 
-/* Строка плейлиста */
 .lib-playlist-row {
     display: flex;
     align-items: center;
@@ -3333,7 +3324,6 @@ label.lbl {
     color: #94a3b8;
 }
 
-/* Чипы видимости */
 .lib-chip {
     display: inline-flex;
     align-items: center;
@@ -3352,7 +3342,3 @@ label.lbl {
     background: #f1f5f9;
     color: #475569;
 }
-
-
-
-
