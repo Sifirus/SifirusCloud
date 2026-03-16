@@ -1,0 +1,90 @@
+<!-- Аудиоплеер (нижняя панель) -->
+<div class="player" id="mainPlayer" style="display:none;">
+    <div class="player-inner">
+
+        <!-- Трек -->
+        <div class="p-track">
+            <div class="p-thumb" id="p-thumb" style="background:linear-gradient(135deg,#dbeafe,#ede9fe);">
+                <!-- Заглушка обложки -->
+                <svg id="p-thumb-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                <img id="p-thumb-img" src="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:9px;">
+            </div>
+            <div>
+                <div class="p-title" id="p-title">—</div>
+                <div class="p-author" id="p-author">—</div>
+            </div>
+            <button class="ctrl p-heart" id="p-heart" style="color:#94a3b8;margin-left:4px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Управление -->
+        <div class="p-controls">
+            <div class="ctrl-row">
+                <!-- Перемешать -->
+                <button class="ctrl" id="btn-shuffle" title="Перемешать">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
+                        <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
+                        <line x1="4" y1="4" x2="9" y2="9"/>
+                    </svg>
+                </button>
+                <!-- Назад -->
+                <button class="ctrl" id="btn-prev" title="Предыдущий трек">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/>
+                    </svg>
+                </button>
+                <!-- Play / Pause -->
+                <button class="ctrl" id="btn-play" title="Воспроизвести">
+                    <svg width="34" height="34" viewBox="0 0 34 34">
+                        <circle cx="17" cy="17" r="17" fill="#3b82f6"/>
+                        <polygon id="play-icon" points="13 10 25 17 13 24" fill="white"/>
+                    </svg>
+                </button>
+                <!-- Вперёд -->
+                <button class="ctrl" id="btn-next" title="Следующий трек">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+                    </svg>
+                </button>
+                <!-- Зациклить -->
+                <button class="ctrl" id="btn-repeat" title="Зациклить">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                        <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="prog-row">
+                <span class="prog-time" id="p-time-cur">0:00</span>
+                <div class="prog-bar" id="p-prog-bar">
+                    <div class="prog-fill" id="p-prog-fill" style="width:0%;"></div>
+                </div>
+                <span class="prog-time" id="p-time-total">0:00</span>
+            </div>
+        </div>
+
+        <!-- Громкость -->
+        <div class="p-right">
+            <button class="ctrl" id="btn-vol" title="Громкость">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                </svg>
+            </button>
+            <div class="vol-bar" id="p-vol-bar">
+                <div class="vol-fill" id="p-vol-fill" style="width:65%;"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Скрытый audio элемент -->
+    <audio id="main-audio" preload="metadata"></audio>
+</div>
+
+{% load static %}
+<script src="{% static 'js/player.js' %}"></script>

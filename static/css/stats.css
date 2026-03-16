@@ -1,0 +1,123 @@
+/* stats page */
+
+.stats-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+}
+.stats-title { font-size: 1.35rem; font-weight: 700; margin: 0 0 2px; }
+.stats-sub { font-size: .86rem; color: #64748b; }
+.stats-periods { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.stats-period-btn {
+    padding: 6px 14px; border-radius: 40px; font-size: .79rem; font-weight: 600;
+    border: 1.5px solid #e2e8f0; background: #fff; color: #475569;
+    cursor: pointer; transition: .15s; white-space: nowrap;
+}
+.stats-period-btn.active { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+.stats-period-btn:hover:not(.active) { border-color: #3b82f6; color: #3b82f6; }
+
+/* 4 метрики */
+.stats-cards {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 14px; margin-bottom: 20px;
+}
+.stats-metric-card {
+    background: #fff; border: 1.5px solid #e8edf3; border-radius: 20px;
+    padding: 20px;
+}
+.stats-metric-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+}
+.stats-metric-num { font-size: 1.5rem; font-weight: 700; margin-bottom: 2px; }
+.stats-metric-lbl { font-size: .78rem; color: #64748b; margin-bottom: 6px; }
+.stats-metric-change { font-size: .74rem; font-weight: 600; }
+.stats-metric-change.positive { color: #22c55e; }
+.stats-metric-change.negative { color: #ef4444; }
+
+/* График */
+.stats-chart-card { padding: 20px; margin-bottom: 20px; }
+.stats-chart-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
+}
+.stats-chart-area { position: relative; }
+.stats-chart-labels {
+    display: flex; justify-content: space-between;
+    font-size: .72rem; color: #94a3b8; margin-top: 6px;
+}
+
+/* Два столбца */
+.stats-two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+
+/* Топ строка */
+.stats-top-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid #f8fafc;
+}
+.stats-top-num { font-size: .82rem; font-weight: 700; color: #94a3b8; width: 18px; text-align: center; }
+.stats-bar-wrap {
+    width: 80px; height: 6px; background: #e2e8f0;
+    border-radius: 4px; overflow: hidden; flex-shrink: 0;
+}
+.stats-bar-fill { height: 100%; background: #3b82f6; border-radius: 4px; }
+
+/* Подписчики бары */
+.stats-subs-bars {
+    display: flex; align-items: flex-end; gap: 8px; height: 80px;
+}
+.stats-sub-bar {
+    flex: 1; background: #818cf8; border-radius: 6px 6px 0 0;
+    min-width: 20px;
+}
+
+/* Лайки */
+.stats-like-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 0;
+}
+.stats-like-bar-wrap {
+    width: 100px; height: 6px; background: #f1f5f9;
+    border-radius: 4px; overflow: hidden; flex-shrink: 0;
+}
+.stats-like-bar { height: 100%; border-radius: 4px; }
+
+/* Дни недели */
+.stats-weekday-bars {
+    display: flex; align-items: flex-end; gap: 10px; height: 100px;
+}
+.stats-wd {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.stats-wd-bar {
+    width: 100%; background: #c7d2fe; border-radius: 6px 6px 0 0;
+    min-height: 8px;
+}
+.stats-wd span { font-size: .72rem; color: #94a3b8; }
+
+/* Страны */
+.stats-country-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 0; font-size: .84rem;
+}
+.stats-country-bar {
+    flex: 1; height: 6px; background: #f1f5f9;
+    border-radius: 4px; overflow: hidden;
+}
+
+/* Комментарии */
+.stats-comment-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid #f1f5f9;
+}
+
+/* Адаптив */
+@media (max-width: 860px) {
+    .stats-cards { grid-template-columns: repeat(2, 1fr); }
+    .stats-two-col { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+    .stats-cards { grid-template-columns: 1fr; }
+}

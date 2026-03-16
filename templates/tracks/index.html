@@ -106,7 +106,7 @@
             </a>
         </div>
         <div class="tracks-grid">
-            {% for track in tracks %}
+            {% for track in newest_tracks %}
             <div class="track-card" data-audio-url="{{ track.audio_file.url }}">
                 <div class="t-cover" style="background:linear-gradient(135deg,#dbeafe,#ede9fe);">
                     {% if track.cover_image %}
@@ -143,25 +143,6 @@
             </div>
             {% empty %}
             <p>Пока нет треков. <a href="{% url 'tracks:track_upload' %}">Загрузите первый!</a></p>
-            {% endfor %}
-        </div>
-
-            <div class="track-card">
-                <div class="t-cover" style="background:linear-gradient(135deg,#cffafe,#a7f3d0);">
-                    <div class="t-cover-art">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(20,184,166,.75)"
-                             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
-                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
-                        </svg>
-                    </div>
-                    <div class="play-overlay">
-                        <div class="play-circle">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
-                                <polygon points="6 3 20 12 6 21 6 3"/>
-                            </svg>
-                        </div>
-                    </div>
             {% endfor %}
         </div>
 

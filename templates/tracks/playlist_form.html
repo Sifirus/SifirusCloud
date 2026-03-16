@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}Создать плейлист{% endblock %}
+{% block content %}
+<div class="page" style="max-width:600px;">
+    <h2 style="font-size:1.35rem;font-weight:700;margin-bottom:4px;">Создать плейлист</h2>
+    <div style="font-size:.86rem;color:#64748b;margin-bottom:24px;">Дайте название и выберите видимость</div>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-box" style="padding:24px;margin-bottom:20px;">
+            <div style="display:flex;flex-direction:column;gap:14px;">
+                <div>
+                    <label class="lbl">Название плейлиста *</label>
+                    {% render_field form.name class="inp" placeholder="Например: Для бега" %}
+                </div>
+                <div>
+                    <label class="lbl">Описание</label>
+                    {% render_field form.description class="inp" rows="2" placeholder="О чём этот плейлист..." %}
+                </div>
+                <div>
+                    <label class="lbl">Обложка</label>
+                    {% render_field form.cover_image class="inp" %}
+                </div>
+                <div>
+                    <label class="lbl">Видимость</label>
+                    {% render_field form.visibility class="inp inp-select" %}
+                </div>
+            </div>
+        </div>
+        <div class="publish-row">
+            <button class="btn-p" type="submit" style="flex:1;justify-content:center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Создать
+            </button>
+            <a href="{% url 'tracks:library' %}" class="btn-o">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

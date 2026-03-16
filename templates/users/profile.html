@@ -32,7 +32,7 @@
                                 Редактировать
                             </button>
                         </a>
-                        <a href="#" class="btn-o sm">
+                        <a href="{% url 'tracks:stats' %}" class="btn-o sm">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="18" y1="20" x2="18" y2="10"/>
@@ -73,7 +73,7 @@
         <div class="tabs">
             <button class="tab active">Треки</button>
             <button class="tab">Топ</button>
-            <button class="tab">Плейлисты</button>
+            <a href="{% url 'tracks:library' %}" class="tab" style="text-decoration:none;">Плейлисты</a>
             <button class="tab">Лайки</button>
         </div>
 
