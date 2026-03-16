@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Редактировать профиль{% endblock %}
+{% block content %}
+
+    <div class="page">
+        <form class="edit-page" method="post" enctype="multipart/form-data"
+              action="{% url 'edit_profile' user_id=user.id %}">
+            {% csrf_token %}
+            <!-- Заголовок -->
+            <div class="edit-header">
+                <a href="{% url 'profile' user_id=user.id %}" class="edit-back">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                    Назад
+                </a>
+                <h1 class="edit-title">Редактировать профиль</h1>
+            </div>
+            <!-- TODO валидация -->
+            <div class="edit-card">
+                {% load widget_tweaks %}
+                <!-- Аватар -->
+                <div class="edit-ava-row">
+                    <div class="edit-ava" id="ava-preview">
+                        {% if avatar %}
+                            <img src="/media/{{ avatar }}" style="object-fit: cover; width: 100%; height: 100%">
+                        {% else %}
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        {% endif %}
+                    </div>
+                    <div class="edit-ava-info">
+                        <div class="edit-ava-name">{{ user.username }}</div>
+                        {% render_field form.avatar id="ava-input" %}
+                        <button type="button" class="btn-o sm" onclick="document.getElementById('ava-input').click()">
+                            Сменить фото
+                        </button>
+                        <div class="edit-ava-hint">JPG или PNG, не более 5 МБ</div>
+                    </div>
+                </div>
+
+                <div class="edit-divider"></div>
+
+                <!-- Форма -->
+                <div class="edit-form">
+
+                    <div class="form-group">
+                        <label class="lbl">Отображаемое имя</label>
+                        {% render_field form.full_name class="inp" type="text" placeholder="Ваше имя" %}
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lbl">О себе</label>
+                        {% render_field form.bio class="inp edit-bio" rows="3" placeholder="Расскажите о себе..." %}
+                        <div class="edit-counter">42/200</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lbl">Город</label>
+                        <div class="inp-wrap">
+            <span class="inp-icon-r">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round"><path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+                            {% render_field form.location class="inp inp-padl" type="text" placeholder="Ваш город" %}
+                        </div>
+                    </div>
+
+                    <div class="edit-divider"></div>
+
+                    <!-- Кнопки -->
+                    <div class="edit-btns">
+                        <button type="submit" class="btn-p" style="flex:1;justify-content:center;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Сохранить
+                        </button>
+                        <a href="{% url 'profile' user_id=user.id %}" class="btn-o">Отмена</a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block extra_js %}
+    <script>
+        document.getElementById('ava-input').addEventListener('change', function () {
+            const file = this.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const preview = document.getElementById('ava-preview');
+                // убираем svg если был
+                preview.innerHTML = '';
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.cssText = 'object-fit:cover;width:100%;height:100%';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
+{% endblock %}
+{% block footer %}{% endblock %}

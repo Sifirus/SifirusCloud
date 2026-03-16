@@ -1,0 +1,460 @@
+{% extends 'base.html' %}
+{% block title %}SifirusCloud - Добро пожаловать{% endblock %}
+{% block navbar %}{% include 'guest_nav.html' %}{% endblock %}
+{% block content %}
+    <!--  HERO  -->
+    <section class="hero" id="Hero">
+        <!-- Floating decorative cards -->
+        <div class="float-cards"> <!-- #TODO надо в будущем сделать синхронизацию с бд -->
+            <div class="fcard" style="top:22%;left:4%;animation:fadeInLeft .8s ease both;">
+                <div class="fcard-ava" style="background:#eff6ff;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.6"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="fcard-name">Neon Dreams</div>
+                    <div class="fcard-sub">Electra · только что</div>
+                </div>
+            </div>
+            <div class="fcard" style="top:38%;right:4%;animation:fadeInRight .9s ease both;">
+                <div class="fcard-ava" style="background:#f0fdf4;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="fcard-name">+234 новых автора</div>
+                    <div class="fcard-sub">за эту неделю</div>
+                </div>
+            </div>
+            <div class="fcard" style="bottom:30%;left:6%;animation:fadeInLeft 1s ease both;">
+                <div class="fcard-ava" style="background:#fef2f2;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="fcard-name">12 481 лайк</div>
+                    <div class="fcard-sub">за сегодня</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-badge">
+                <div class="hero-badge-dot"></div>
+                Платформа для авторов и слушателей
+            </div>
+            <h1>Музыка, которую<br>создают <span class="hero-accent">люди</span></h1>
+            <p class="hero-sub">Загружайте треки, слушайте новинки, открывайте независимых авторов. Без алгоритмов, без
+                посредников — только живая музыка.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn-white" style="padding:12px 28px;font-size:.95rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    Начать бесплатно
+                </a>
+                <a href="#" class="btn-ghost-w" style="padding:12px 28px;font-size:.95rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="white" stroke="none">
+                        <polygon points="6 3 20 12 6 21 6 3"/>
+                    </svg>
+                    Слушать каталог
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hstat">
+                    <div class="hstat-num">12k+</div>
+                    <div class="hstat-lbl">треков</div>
+                </div>
+                <div class="hstat">
+                    <div class="hstat-num">4.2k</div>
+                    <div class="hstat-lbl">авторов</div>
+                </div>
+                <div class="hstat">
+                    <div class="hstat-num">38k</div>
+                    <div class="hstat-lbl">прослушиваний в день</div>
+                </div>
+                <div class="hstat">
+                    <div class="hstat-num">Бесплатно</div>
+                    <div class="hstat-lbl">навсегда</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--  FEATURES  -->
+    <section class="section" style="background:#f5f7fa;" id="Features">
+        <div class="section-inner">
+
+            <!-- Intro: text + 2×2 cards -->
+            <div class="feat-intro">
+                <div>
+                    <div class="section-label">Для всех</div>
+                    <div class="section-title">Слушать просто.<br>Создавать легко.</div>
+                    <p class="section-sub">SifirusCloud — пространство, где независимые авторы публикуют музыку, а
+                        слушатели открывают её первыми. Никаких барьеров.</p>
+                    <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;">
+                        <a href="#" class="btn-p">Начать сейчас</a>
+                        <a href="#" class="btn-o">Открыть каталог</a>
+                    </div>
+                </div>
+                <div class="feat-grid" style="grid-template-columns:1fr 1fr;">
+                    <div class="feat-card">
+                        <div class="feat-icon" style="background:#eff6ff;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="feat-title">Загружай треки</div>
+                        <div class="feat-sub">MP3 или WAV до 100 МБ. Метаданные, обложка, теги — всё в одном месте.
+                        </div>
+                    </div>
+                    <div class="feat-card">
+                        <div class="feat-icon" style="background:#f0fdf4;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="feat-title">История</div>
+                        <div class="feat-sub">Всё, что ты слушал — под рукой. Возвращайся к любимым в один клик.</div>
+                    </div>
+                    <div class="feat-card">
+                        <div class="feat-icon" style="background:#fef2f2;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#ef4444" stroke="none">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </div>
+                        <div class="feat-title">Лайки и плейлисты</div>
+                        <div class="feat-sub">Сохраняй понравившееся, собирай плейлисты под любое настроение.</div>
+                    </div>
+                    <div class="feat-card">
+                        <div class="feat-icon" style="background:#faf5ff;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="feat-title">Подписки</div>
+                        <div class="feat-sub">Следи за любимыми авторами и получай уведомления о новых релизах.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 крупных фичи -->
+            <div class="feat-grid">
+                <div class="feat-card" style="padding:32px;">
+                    <div class="feat-icon" style="background:#fefce8;width:60px;height:60px;border-radius:18px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ca8a04" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                            <polyline points="16 7 22 7 22 13"/>
+                        </svg>
+                    </div>
+                    <div class="feat-title" style="font-size:1.05rem;">Еженедельный чарт</div>
+                    <div class="feat-sub">100 лучших треков по прослушиваниям. Обновляется каждую неделю — будь в курсе
+                        трендов.
+                    </div>
+                </div>
+                <div class="feat-card" style="padding:32px;">
+                    <div class="feat-icon" style="background:#eff6ff;width:60px;height:60px;border-radius:18px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"/>
+                            <line x1="12" y1="20" x2="12" y2="4"/>
+                            <line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                    </div>
+                    <div class="feat-title" style="font-size:1.05rem;">Статистика для авторов</div>
+                    <div class="feat-sub">Прослушивания, лайки, рост аудитории — наглядная аналитика по каждому треку.
+                    </div>
+                </div>
+                <div class="feat-card" style="padding:32px;">
+                    <div class="feat-icon" style="background:#f0fdf4;width:60px;height:60px;border-radius:18px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M9 9h6M9 12h6M9 15h4"/>
+                        </svg>
+                    </div>
+                    <div class="feat-title" style="font-size:1.05rem;">Комментарии и фидбек</div>
+                    <div class="feat-sub">Обсуждайте треки прямо на странице. Авторы читают комментарии и отвечают
+                        слушателям.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!--  PREVIEW TRACKS  -->
+    <section class="section" style="background:white;">
+        <div class="section-inner">
+            <div style="text-align:center;margin-bottom:36px;">
+                <div class="section-label" style="justify-content:center;display:flex;">Каталог</div>
+                <div class="section-title" style="margin-bottom:8px;">Тысячи треков уже ждут</div>
+                <p class="section-sub" style="margin:0 auto;">Зарегистрируйтесь, чтобы слушать без ограничений и лайкать
+                    любимые треки.</p>
+            </div>
+
+            <div class="preview-grid" style="position:relative;">
+
+                <!-- Track 1 -->
+                <div class="preview-track">
+                    <div class="t-cover" style="background:linear-gradient(135deg,#dbeafe,#ede9fe);height:120px;">
+                        <div style="width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(99,102,241,.75)"
+                                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="t-name" style="font-size:.82rem;">Neon Dreams</div>
+                    <div class="t-author" style="font-size:.72rem;">Electra</div>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="preview-track">
+                    <div class="t-cover" style="background:linear-gradient(135deg,#cffafe,#a7f3d0);height:120px;">
+                        <div style="width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(20,184,166,.75)"
+                                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="t-name" style="font-size:.82rem;">Midnight Waves</div>
+                    <div class="t-author" style="font-size:.72rem;">Coastal</div>
+                </div>
+
+                <!-- Track 3 (blurred) -->
+                <div class="preview-track" style="position:relative;">
+                    <div class="t-cover" style="background:linear-gradient(135deg,#fef3c7,#fde68a);height:120px;">
+                        <div style="width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(202,138,4,.75)"
+                                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="t-name" style="font-size:.82rem;">velvet morning</div>
+                    <div class="t-author" style="font-size:.72rem;">luna</div>
+                    <div class="preview-blur">
+                        <div class="preview-cta">
+                            <div>Войдите, чтобы<br>слушать</div>
+                            <a href="#" class="btn-p sm">Войти</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 4 (blurred) -->
+                <div class="preview-track" style="position:relative;">
+                    <div class="t-cover" style="background:linear-gradient(135deg,#fce7f3,#ede9fe);height:120px;">
+                        <div style="width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(139,92,246,.75)"
+                                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="t-name" style="font-size:.82rem;">Prism</div>
+                    <div class="t-author" style="font-size:.72rem;">Kaleido</div>
+                    <div class="preview-blur">
+                        <div class="preview-cta">
+                            <div>Войдите, чтобы<br>слушать</div>
+                            <a href="#" class="btn-p sm">Войти</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="text-align:center;margin-top:28px;">
+                <a href="#" class="btn-p" style="padding:12px 32px;font-size:.95rem;">Зарегистрироваться
+                    бесплатно</a>
+            </div>
+        </div>
+    </section>
+
+    <!--  TESTIMONIALS  -->
+    <section class="section" style="background:#f5f7fa;" id="Reviews">
+        <div class="section-inner">
+            <div style="text-align:center;margin-bottom:36px;">
+                <div class="section-label" style="justify-content:center;display:flex;">Отзывы</div>
+                <div class="section-title">Что говорят пользователи</div>
+            </div>
+            <div class="testi-grid">
+
+                <div class="testi-card">
+                    <div style="display:flex;gap:2px;margin-bottom:12px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="testi-text">«Наконец-то платформа, где мою музыку слышат живые люди, а не алгоритм. За
+                        месяц набрал 800 подписчиков без единой рекламы.»
+                    </div>
+                    <div class="testi-author">
+                        <div class="testi-ava" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="testi-name">Electra</div>
+                            <div class="testi-role">Электронная музыка</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testi-card">
+                    <div style="display:flex;gap:2px;margin-bottom:12px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="testi-text">«Открыла столько крутой независимой музыки. Плейлисты, история, рекомендации
+                        — всё удобно и быстро. Слушаю каждый день.»
+                    </div>
+                    <div class="testi-author">
+                        <div class="testi-ava" style="background:linear-gradient(135deg,#0891b2,#22d3ee);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="testi-name">Мария К.</div>
+                            <div class="testi-role">Слушатель</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testi-card">
+                    <div style="display:flex;gap:2px;margin-bottom:12px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                            <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="testi-text">«Статистика по трекам — огонь. Вижу откуда слушатели, какой трек зашёл
+                        лучше. Помогает понять, в каком направлении двигаться.»
+                    </div>
+                    <div class="testi-author">
+                        <div class="testi-ava" style="background:linear-gradient(135deg,#16a34a,#22c55e);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="testi-name">Coastal</div>
+                            <div class="testi-role">Ambient / Lo-fi</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!--  CTA  -->
+    <section class="cta-section">
+    <div style="position:relative;z-index:1;max-width:600px;margin:0 auto;">
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:14px;">
+            Начните прямо сейчас
+        </div>
+        <div style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;color:white;margin-bottom:16px;">Ваша музыка
+            заслуживает<br>быть услышанной
+        </div>
+        <p style="font-size:1rem;color:rgba(255,255,255,.7);margin-bottom:32px;">Регистрация занимает меньше минуты.
+            Начните загружать треки сегодня.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a href="#" class="btn-white"
+               style="padding:13px 30px;font-size:.95rem;">Зарегистрироваться</a>
+            <a href="#" class="btn-ghost-w" style="padding:13px 30px;font-size:.95rem;">Войти в аккаунт</a>
+        </div>
+    </div>
+{% endblock %}
+{% block player %}{% endblock %}

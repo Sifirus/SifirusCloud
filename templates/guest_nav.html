@@ -1,0 +1,32 @@
+<nav class="guest-nav" id="guestNav">
+    <div class="gnav-inner">
+        <span class="gnav-brand">SifirusCloud</span>
+
+        <!-- Desktop links -->
+        <div class="gnav-links">
+            <a class="gnav-link" href="#Hero">О платформе</a>
+            <a class="gnav-link" href="#Features">Функции</a>
+            <a class="gnav-link" href="#Reviews">Отзывы</a>
+            <a class="btn-ghost-w" href="{% url 'login' %}">Войти</a>
+            <a class="btn-white" href="{% url 'register' %}" style="margin-left:4px;">Регистрация</a>
+        </div>
+
+        <!-- Burger (mobile only) -->
+        <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a class="gnav-link" href="#Hero">О платформе</a>
+        <a class="gnav-link" href="#Features">Функции</a>
+        <a class="gnav-link" href="#Reviews">Отзывы</a>
+        <div class="mob-btns">
+            <a class="btn-ghost-w" href="{% url 'login' %}">Войти</a>
+            <a class="btn-white" href="{% url 'register' %}">Регистрация</a>
+        </div>
+    </div>
+</nav>
