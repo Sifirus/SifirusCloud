@@ -5,11 +5,13 @@
 
         <!-- Desktop nav -->
         <nav class="nav-links">
-            {% url 'index' as url %}
+            {% url 'tracks:index' as url %}
             <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:index' %}">Главная</a>
             <a class="nav-link " href="#">Каталог</a>
-            <a class="nav-link " href="#">Библиотека</a>
-            <a class="nav-link " href="{% url 'tracks:track_upload' %}">Загрузить</a>
+            {% url 'tracks:library' as lib_url %}
+            <a class="nav-link {% if request.path == lib_url %}active{% endif %}" href="{% url 'tracks:library' %}">Библиотека</a>
+            {% url 'track_upload' as url %}
+            <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:track_upload' %}">Загрузить</a>
         </nav>
 
         <div class="nav-right">
@@ -164,6 +166,7 @@
         <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:index' %}">Главная</a>
         <a class="nav-link" href="#">Каталог</a>
         <a class="nav-link" href="#">Библиотека</a>
-        <a class="nav-link" href="{% url 'tracks:track_upload' %}">Загрузить</a>
+        {% url 'track_upload' as url %}
+        <a class="nav-link {% if request.path == url %}active{% endif %}" href="{% url 'tracks:track_upload' %}">Загрузить</a>
     </div>
 </div>

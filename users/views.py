@@ -4,11 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
 from .models import *
+from tracks.models import Track
 
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect(reverse('index'))
+        return redirect(reverse('tracks:index'))
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -28,7 +29,7 @@ def register(request):
 
 def login_user(request):
     if request.user.is_authenticated:
-        return redirect(reverse('index'))
+        return redirect(reverse('tracks:index'))
 
     if request.method == 'POST':
         form = LoginForm(request, request.POST)
@@ -36,7 +37,7 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect(reverse('index'))
+            return redirect(reverse('tracks:index'))
 
         else:
             return render(request, 'users/login_form.html', {'form': form})
@@ -49,7 +50,7 @@ def login_user(request):
 def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
-        return redirect(reverse('index'))
+        return redirect(reverse('tracks:index'))
     else:
         return redirect('login')
 
@@ -57,7 +58,18 @@ def logout_user(request):
 @login_required(login_url='login')
 def render_profile(request, user_id):
     profile = Profile.objects.filter(user_id=user_id).first()
-    return render(request, 'users/profile.html', {'profile': profile})
+
+    user_tracks = Track.objects.filter(uploaded_by_id=user_id)
+    top_tracks = user_tracks.order_by('-plays_count')[:3]
+    all_tracks = user_tracks.order_by('-created_at')[:8]
+    tracks_count = user_tracks.count()
+
+    return render(request, 'users/profile.html', {
+        'profile': profile,
+        'top_tracks': top_tracks,
+        'all_tracks': all_tracks,
+        'tracks_count': tracks_count,
+    })
 
 
 @login_required(login_url='login')

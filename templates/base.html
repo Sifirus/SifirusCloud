@@ -22,11 +22,9 @@
 
 <body>
 
-<header>
-    {% block navbar %}
-        {% include 'nav.html' %}
-    {% endblock %}
-</header>
+{% block navbar %}
+    {% include 'nav.html' %}
+{% endblock %}
 
 <main>
     {% block content %}{% endblock %}

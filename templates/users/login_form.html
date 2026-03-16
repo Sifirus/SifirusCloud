@@ -5,7 +5,7 @@
     <div class="auth-page">
         <form class="auth-card" method="post" action="{% url 'login' %}">
             {% csrf_token %}
-            <a class="auth-logo" href="{% url 'index' %}">SifirusCloud</a>
+            <a class="auth-logo" href="{% url 'tracks:index' %}">SifirusCloud</a>
             {% if messages %}
                 {% for message in messages %}
                     <div class="field-{% if message.tags == 'success'%}ok{% endif %}">

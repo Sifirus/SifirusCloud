@@ -9,5 +9,9 @@ class Profile(models.Model):
     location = models.CharField(max_length=255, null=True, blank=True)
     avatar = models.ImageField(upload_to="profile_pics/", null=True, blank=True)
 
+    class Meta:
+        verbose_name = "Профиль"
+        verbose_name_plural = "Профили"
+
     def __str__(self):
         return f'{self.user.username} - Profile'

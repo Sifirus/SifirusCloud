@@ -6,7 +6,7 @@
         <!-- #TODO надо будет полосу силы и выводить что логин доступен + Гугл логин -->
         <form class="auth-card" method="post" action="{% url 'register' %}">
             {% csrf_token %}
-            <a class="auth-logo" href="{% url 'index' %}">SifirusCloud</a>
+            <a class="auth-logo" href="{% url 'tracks:index' %}">SifirusCloud</a>
             <div class="auth-title">Создать аккаунт</div>
             <div class="auth-sub">Бесплатно и навсегда</div>
 
