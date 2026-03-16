@@ -158,71 +158,18 @@
                     </span>
                     Мои плейлисты
                 </h5>
-                <button class="btn-p sm">
+                <a href="{% url 'tracks:playlist_create' %}" class="btn-p sm">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          stroke-width="2.5" stroke-linecap="round">
                         <line x1="12" y1="5" x2="12" y2="19"/>
                         <line x1="5" y1="12" x2="19" y2="12"/>
                     </svg>
                     Создать
-                </button>
+                </a>
             </div>
 
-            <div class="lib-playlist-row">
-                <div class="lib-playlist-thumb" style="background:#fef2f2;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="8" y1="6" x2="21" y2="6"/>
-                        <line x1="8" y1="12" x2="21" y2="12"/>
-                        <line x1="8" y1="18" x2="21" y2="18"/>
-                        <line x1="3" y1="6" x2="3.01" y2="6"/>
-                        <line x1="3" y1="12" x2="3.01" y2="12"/>
-                        <line x1="3" y1="18" x2="3.01" y2="18"/>
-                    </svg>
-                </div>
-                <div class="lib-playlist-info">
-                    <div class="lib-playlist-name">Избранное</div>
-                    <div class="lib-playlist-meta">12 треков · 45 мин</div>
-                </div>
-                <span class="lib-chip lib-chip-blue">Публичный</span>
-                <button class="lib-more-btn" aria-label="Ещё">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="lib-playlist-row">
-                <div class="lib-playlist-thumb" style="background:#f0fdf4;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="8" y1="6" x2="21" y2="6"/>
-                        <line x1="8" y1="12" x2="21" y2="12"/>
-                        <line x1="8" y1="18" x2="21" y2="18"/>
-                        <line x1="3" y1="6" x2="3.01" y2="6"/>
-                        <line x1="3" y1="12" x2="3.01" y2="12"/>
-                        <line x1="3" y1="18" x2="3.01" y2="18"/>
-                    </svg>
-                </div>
-                <div class="lib-playlist-info">
-                    <div class="lib-playlist-name">Для бега</div>
-                    <div class="lib-playlist-meta">8 треков · 32 мин</div>
-                </div>
-                <span class="lib-chip lib-chip-gray">Приватный</span>
-                <button class="lib-more-btn" aria-label="Ещё">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="lib-playlist-row">
+            {% for pl in playlists %}
+            <a href="{% url 'tracks:playlist_detail' pk=pl.pk %}" class="lib-playlist-row" style="text-decoration:none;">
                 <div class="lib-playlist-thumb" style="background:#eff6ff;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round">
@@ -235,19 +182,17 @@
                     </svg>
                 </div>
                 <div class="lib-playlist-info">
-                    <div class="lib-playlist-name">Вечерний</div>
-                    <div class="lib-playlist-meta">5 треков · 18 мин</div>
+                    <div class="lib-playlist-name">{{ pl.name }}</div>
+                    <div class="lib-playlist-meta">{{ pl.tracks.count }} треков</div>
                 </div>
-                <span class="lib-chip lib-chip-gray">Приватный</span>
-                <button class="lib-more-btn" aria-label="Ещё">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                    </svg>
-                </button>
+                <span class="lib-chip lib-chip-{% if pl.visibility == 'public' %}blue{% else %}gray{% endif %}">{{ pl.get_visibility_display }}</span>
+            </a>
+            {% empty %}
+            <div style="text-align:center;padding:20px;font-size:.86rem;color:#94a3b8;">
+                У вас пока нет плейлистов.
+                <a href="{% url 'tracks:playlist_create' %}" style="color:#3b82f6;font-weight:600;">Создать первый</a>
             </div>
+            {% endfor %}
 
         </div>
     </div>

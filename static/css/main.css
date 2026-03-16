@@ -3342,3 +3342,453 @@ label.lbl {
     background: #f1f5f9;
     color: #475569;
 }
+
+/* Шапка плейлиста */
+.pl-hero {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+.pl-cover {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.pl-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.pl-cover-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.pl-info {
+    flex: 1;
+    min-width: 200px;
+}
+.pl-eyebrow {
+    font-size: .72rem;
+    font-weight: 700;
+    color: #94a3b8;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+.pl-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: #1e293b;
+}
+.pl-meta {
+    font-size: .88rem;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+.pl-visibility {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .82rem;
+    color: #64748b;
+    margin-bottom: 16px;
+}
+.pl-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Поиск */
+.pl-search-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.pl-search-wrap {
+    flex: 1;
+    position: relative;
+}
+.pl-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+.pl-search-input {
+    width: 100%;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 11px 16px 11px 40px;
+    font-size: .88rem;
+    font-family: 'Inter', sans-serif;
+    color: #1e293b;
+    outline: none;
+    background: #fff;
+    transition: .15s;
+}
+.pl-search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,.1);
+}
+
+/* Таблица треков */
+.pl-table {
+    padding: 0;
+    overflow: hidden;
+}
+.pl-table-head {
+    display: grid;
+    grid-template-columns: 32px 44px 1fr 140px 60px 64px;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 16px;
+    font-size: .72rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    border-bottom: 1px solid #f1f5f9;
+}
+.pl-track-row {
+    display: grid;
+    grid-template-columns: 32px 44px 1fr 140px 60px 64px;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 16px;
+    transition: .12s;
+    cursor: pointer;
+    border-bottom: 1px solid #f8fafc;
+}
+.pl-track-row:last-child {
+    border-bottom: none;
+}
+.pl-track-row:hover {
+    background: #f8fafc;
+}
+.pl-row-num {
+    font-size: .78rem;
+    color: #cbd5e1;
+    text-align: center;
+    display: block;
+}
+.pl-mini-cover {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.pl-track-name {
+    font-size: .88rem;
+    font-weight: 600;
+    color: #1e293b;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pl-track-name:hover {
+    color: #3b82f6;
+}
+.pl-col-author {
+    font-size: .82rem;
+    color: #64748b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pl-col-dur {
+    font-size: .78rem;
+    color: #94a3b8;
+    text-align: center;
+}
+.pl-col-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.pl-heart-btn,
+.pl-more-btn {
+    border: none;
+    background: none;
+    padding: 4px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: .15s;
+}
+.pl-heart-btn:hover {
+    color: #ef4444;
+}
+.pl-heart-btn.active {
+    color: #ef4444;
+}
+.pl-heart-btn.active svg {
+    fill: #ef4444;
+}
+.pl-more-btn:hover {
+    color: #475569;
+}
+
+/* Адаптив */
+@media (max-width: 860px) {
+    .pl-hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .pl-cover {
+        width: 160px;
+        height: 160px;
+    }
+    .pl-actions {
+        justify-content: center;
+    }
+    .pl-table-head,
+    .pl-track-row {
+        grid-template-columns: 44px 1fr 60px 54px;
+    }
+    .pl-col-num,
+    .pl-col-author {
+        display: none;
+    }
+}
+@media (max-width: 480px) {
+    .pl-cover {
+        width: 120px;
+        height: 120px;
+    }
+    .pl-name {
+        font-size: 1.2rem;
+    }
+    .pl-search-row {
+        flex-direction: column;
+    }
+}
+
+/* Строка доступного трека для добавления */
+.pl-available-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    transition: .12s;
+}
+.pl-available-row:hover {
+    background: #f8fafc;
+}
+
+/* Глобальный плеер (нижняя панель) */
+
+.player {
+    background: rgba(255,255,255,.97);
+    border-top: 1.5px solid #e8edf3;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.player-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Левая часть: обложка + название */
+.p-track {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+    flex-shrink: 0;
+}
+
+.p-thumb {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.p-thumb img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 9px;
+}
+
+.p-title {
+    font-size: .81rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 110px;
+    color: #1e293b;
+}
+
+.p-author {
+    font-size: .69rem;
+    color: #94a3b8;
+}
+
+.p-heart {
+    border: none;
+    background: none;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: .15s;
+}
+
+/* Центр: управление + прогресс */
+.p-controls {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.ctrl-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.ctrl {
+    border: none;
+    background: none;
+    color: #94a3b8;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.ctrl:hover {
+    color: #475569;
+}
+
+.prog-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.prog-time {
+    font-size: .68rem;
+    color: #94a3b8;
+    flex-shrink: 0;
+    min-width: 30px;
+}
+
+.prog-bar {
+    flex: 1;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.prog-fill {
+    height: 100%;
+    background: #3b82f6;
+    border-radius: 4px;
+    width: 0%;
+    transition: width .1s linear;
+}
+
+/* Правая часть: громкость */
+.p-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.vol-bar {
+    width: 64px;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.vol-fill {
+    height: 100%;
+    background: #3b82f6;
+    border-radius: 4px;
+}
+
+/* Адаптив плеера */
+@media (max-width: 768px) {
+    .player-inner {
+        padding: 8px 12px;
+        gap: 10px;
+    }
+    .p-track {
+        min-width: 120px;
+    }
+    .p-title {
+        max-width: 80px;
+    }
+    .p-right {
+        display: none;
+    }
+    .ctrl-row {
+        gap: 12px;
+    }
+    .prog-row {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .p-track {
+        min-width: 100px;
+    }
+    .prog-row {
+        display: none;
+    }
+}
