@@ -2,6 +2,10 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+app_name = 'tracks'  # обязательно для пространства имён
 
 
 app_name = 'tracks'

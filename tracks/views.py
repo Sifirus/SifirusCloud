@@ -1,33 +1,20 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from .models import Track
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, DeleteView
-from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
+from .models import Track
 from .forms import TrackForm
-from tracks.models import Track
-
 
 def index(request):
+    # Получаем все треки из базы, можно отсортировать по дате
+    tracks = Track.objects.all().order_by('-created_at')
+    
     if request.user.is_authenticated:
-        newest_tracks = Track.objects.order_by('-created_at')[:8]
-        return render(request, 'tracks/index.html', {'newest_tracks': newest_tracks})
+        return render(request, 'tracks/index.html', {'tracks': tracks})
     else:
-        return render(request, 'users/guest.html')
-
-
-@login_required(login_url='login')
-def library(request):
-    """Страница «Моя библиотека»."""
-    liked_tracks = Track.objects.order_by('-created_at')[:5]
-    my_tracks_count = Track.objects.filter(uploaded_by=request.user).count()
-
-    return render(request, 'tracks/library.html', {
-        'liked_tracks': liked_tracks,
-        'my_tracks_count': my_tracks_count,
-    })
-
+        return render(request, 'users/guest.html', {'tracks': tracks})  # если хотим показывать треки гостям
 class TrackCreateView(LoginRequiredMixin, CreateView):
     model = Track
     form_class = TrackForm
@@ -39,12 +26,6 @@ class TrackCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class TrackDetailView(LoginRequiredMixin, DetailView):
-    model = Track
-    template_name = 'tracks/track_detail.html'
-    context_object_name = 'track'
-
-
 class TrackUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Track
     form_class = TrackForm
@@ -53,7 +34,8 @@ class TrackUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         track = self.get_object()
-        return self.request.user == track.uploaded_by
+        return self.request.user == track.uploaded_by or self.request.user.is_superuser
+
 
 class TrackDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Track
@@ -62,4 +44,4 @@ class TrackDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         track = self.get_object()
-        return self.request.user == track.uploaded_by
+        return self.request.user == track.uploaded_by or self.request.user.is_superuser
