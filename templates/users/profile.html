@@ -152,7 +152,7 @@
         <div class="profile-tracks-grid">
             {% if all_tracks %}
                 {% for track in all_tracks %}
-                <div class="track-card">
+                <div class="track-card" data-audio-url="{{ track.audio_file.url }}" data-track-id="{{ track.pk }}" data-title="{{ track.title }}" data-artist="{{ track.artist }}" data-cover="{% if track.cover_image %}{{ track.cover_image.url }}{% endif %}">
                     <div class="t-cover" style="{% if track.cover_image %}background-image:url('{{ track.cover_image.url }}');background-size:cover;background-position:center;{% else %}background:linear-gradient(135deg,#dbeafe,#ede9fe);{% endif %}">
                         <div class="t-cover-art" style="width:50px;height:50px;">
                             {% if not track.cover_image %}
@@ -230,5 +230,25 @@
 
     </div>
 
+{% endblock %}
+{% block extra_js %}
+<script>
+document.querySelectorAll('.track-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+        if (e.target.closest('a') || e.target.closest('button')) return;
+        const data = {
+            id: card.dataset.trackId,
+            url: card.dataset.audioUrl,
+            title: card.dataset.title,
+            artist: card.dataset.artist,
+            cover: card.dataset.cover || '',
+        };
+        if (window.Player) {
+            Player.loadQueue([data], 0);
+            Player.play();
+        }
+    });
+});
+</script>
 {% endblock %}
 {% block footer %}{% endblock %}

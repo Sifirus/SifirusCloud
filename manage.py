@@ -17,7 +17,5 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
-# "Пичарм говно ебаное сука для ебучих хуесосов ебаных"
-
 if __name__ == '__main__':
     main()
